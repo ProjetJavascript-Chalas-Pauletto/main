@@ -13,19 +13,44 @@
 
         <link rel="stylesheet" href="css/normalize.css">
         <link rel="stylesheet" href="css/main.css">
+        <link rel="stylesheet" href="css/style3.css" />
+        <script src="js/modernizr.custom.js"></script>
     </head>
     <body>
-        <!--[if lte IE 9]>
-            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
-        <![endif]-->
+        <div class="container">
+            <!-- GameContent -->
+            <form id="login-form" action="/json/login.php" method="post" style="display: none">
+                <input type="text" name="username" />
+                <input type="password" name="password" />
+                <input class="btn btn-light" type="submit" value="Connexion"/>
+                <p id="logMsg"></p>
+            </form>
 
-        <!-- Add your site or application content here -->
-        <p>Hello world! This is HTML5 Boilerplate.</p>
+            <form id="logout-form" action="/json/logout.php" style="display: none">
+                <input class="form-control" type="submit" value="Deconnexion"/>
+            </form>
+
+            <nav id="bt-menu" class="bt-menu">
+                <a href="#" class="bt-menu-trigger"><span>Menu</span></a>
+                <ul>
+                    <li><a href="#" class="bt-icon icon-user-outline">Character</a></li>
+                    <li><a href="#" class="bt-icon icon-sun">Skills</a></li>
+                    <li><a href="#" class="bt-icon icon-windows">Jobs</a></li>
+                    <li><a href="#" class="bt-icon icon-speaker">Map</a></li>
+                    <li><a href="#" class="bt-icon icon-star">Inventory</a></li>
+                    <li><a href="#" class="bt-icon icon-bubble">Logout</a></li>
+                </ul>
+            </nav>
+
+        </div>
+
+
         <script src="js/vendor/modernizr-3.5.0.min.js"></script>
         <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
         <script>window.jQuery || document.write('<script src="js/vendor/jquery-3.2.1.min.js"><\/script>')</script>
         <script src="js/plugins.js"></script>
         <script src="js/main.js"></script>
-
+        <script src="js/borderMenu.js"></script>
+        <script src="js/classie.js"></script>
     </body>
 </html>
