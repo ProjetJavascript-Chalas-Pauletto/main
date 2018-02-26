@@ -9,18 +9,57 @@ $resultat->result = true; // How is it going ?
 $resultat->message = " "; // Error displaying
 
 if ($_POST['username'] != "" && $_POST['password'] != "" && $_POST['passwordCheck'] != "" && $_POST['mail'] && $_POST['password'] == $_POST['passwordCheck']) {
-        $username = $_POST['username'];
-        $password = $_POST['password'];
-        $mail = $_POST['mail'];
+    $username = $_POST['username'];
+    $password = $_POST['password'];
+    $mail = $_POST['mail'];
+
+    $pdo = getConnection();
+    $sql1 = "SELECT * FROM USER WHERE USERNAME = :username";
+    $stmtU = $pdo->prepare($sql1);
+    $stmtU->bindValue('username', $username,PDO::PARAM_STR);
+
+    try
+    {
+        $stmtU->execute();
+    }
+    catch (PDOException $e)
+    {
+        $resultat->result = false;
+        $resultat->message = "Database connexion error";
+        exit();
+    }
+
+    if($stmtU->rowCount() !=0){
+        $resultat->result=false;
+
+    }
+
+    $sql2 = 'SELECT * FROM USER WHERE EMAIL = :email';
+    $stmtE = $pdo->prepare($sql2);
+    $stmtE->bindValue('email', $mail, PDO::PARAM_STR);
+    try
+    {
+        $stmtE->execute();
+    }
+    catch (PDOException $e)
+    {
+        $resultat->result = false;
+        $resultat->message = "Database connexion error";
+        exit();
+    }
+    if ($stmtE->rowCount() != 0){
+        $resultat->result=false;
+    }
+
+    if($resultat->result){
 
         $password = md5($password);
 
-        $pdo = getConnection();
-        $sql = "INSERT INTO USER (USERNAME, PASSWORD, EMAIL) VALUES (:USERNAME, :PASSWORD, :EMAIL)";
-        $stmt3 = $pdo->prepare($sql);
-        $stmt3->bindValue(':USERNAME', $username);
-        $stmt3->bindValue(':PASSWORD', $password);
-        $stmt3->bindValue(':EMAIL', $mail);
+        $sql3 = "INSERT INTO USER (USERNAME, PASSWORD, EMAIL) VALUES (:username, :password, :email)";
+        $stmt3 = $pdo->prepare($sql3);
+        $stmt3->bindValue('username', $username,PDO::PARAM_STR);
+        $stmt3->bindValue('password', $password,PDO::PARAM_STR);
+        $stmt3->bindValue('email', $mail,PDO::PARAM_STR);
         try
         {
             $stmt3->execute();
@@ -32,9 +71,13 @@ if ($_POST['username'] != "" && $_POST['password'] != "" && $_POST['passwordChec
             exit();
         }
 
+    } else {
+        $resultat->result = false;
+        $resultat->message = "Account creation error : Username or mail already used";
+    }
 } else {
     $resultat->result = false;
-    $resultat->message = "Account creation error";
+    $resultat->message = "Account creation error : Password may be invalid";
 }
 
 header('Cache-Control: no-cache, must-revalidate');

@@ -13,13 +13,11 @@
                 data: $(this).serialize()
             })
                 .done(function (data) {
-                    console.log(data.result);
-                    console.log(data.message);
                     if(data.result) {
                         $('#accountCreationForm').hide();
                         $('body').html("Things went right !");
                     } else {
-                        $('body').html("Things went wrong !");
+                        $('body').html(data.message);
                     }
                 })
                 .fail(function () {
