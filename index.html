@@ -18,6 +18,17 @@
         <script src="js/modernizr.custom.js"></script>
     </head>
     <body>
+
+    <div id="loader-wrapper">
+        <div id="loader"></div>
+
+        <div class="loader-section section-left"></div>
+        <div class="loader-section section-right"></div>
+
+    </div>
+
+
+
         <div class="container">
             <!-- GameContent -->
             <form id="login-form" action="/json/login.php" method="post" style="display: none">
@@ -31,10 +42,10 @@
                 <a href="#" class="bt-menu-trigger"><span>Menu</span></a>
                 <ul>
                     <li><a href="#" class="bt-icon icon-user-outline">Character</a></li>
-                    <li><a href="#" class="bt-icon icon-sun">Skills</a></li>
                     <li><a href="#" id="bt-jobs" class="bt-icon icon-windows">Jobs</a></li>
-                    <li><a href="#" id="bt-map" class="bt-icon icon-speaker">Map</a></li>
+                    <li><a href="#" id="bt-skills" class="bt-icon icon-sun">Skills</a></li>
                     <li><a href="#" id="bt-inventory" class="bt-icon icon-star">Inventory</a></li>
+                    <li><a href="#" id="bt-map" class="bt-icon icon-speaker">Map</a></li>
                     <li><a href="#" class="bt-icon icon-bubble">Logout</a></li>
                 </ul>
                 <form id="logout-form" action="/json/logout.php" style="display: none">
@@ -49,6 +60,7 @@
                 </div>
                 -->
             </nav>
+
 
 
             <div id="job" style="display: none">
@@ -71,3 +83,6 @@
         <script src="js/jobs.js"></script>
     </body>
 </html>
+
+
+<!--https://ihatetomatoes.net/create-custom-preloading-screen/ -->

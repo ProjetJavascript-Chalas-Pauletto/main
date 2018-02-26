@@ -39,9 +39,33 @@ body  {
 	transition: border-width 0.3s, background-color 0.3s;
 }
 
+/* MENU PANELS */
 .bt-overlay {
 	position: absolute;
 	width: 100%;
+	opacity: 0;
+	-webkit-transition: opacity 0.3s;
+	transition: opacity 0.3s;
+}
+
+.jobs-panel {
+	opacity: 1;
+	background: darkslategray;
+}
+
+.inventory-panel {
+	opacity: 1;
+	background: darkmagenta;
+}
+
+.map-panel {
+	opacity: 1;
+	background: aquamarine;
+}
+
+.skills-panel {
+	opacity: 1;
+	background: lightgreen;
 }
 
 .bt-menu-open .bt-overlay {
@@ -124,11 +148,17 @@ body  {
     position: fixed;
     right: 0;
     top: 0;
-    -webkit-transition: height 0s 0.3s;
-    transition: height 0s 0.3s;
+	opacity: 0;
+	-webkit-transition: -webkit-transform 0.3s, opacity 0.3s;
+	transition: transform 0.3s, opacity 0.3s;
+	-webkit-transform: translate3d(0,100%,0);
+	transform: translate3d(0,-100%,0);
 }
 
 .bt-menu.bt-menu-open #logout-form {
+	opacity: 1;
+	-webkit-transform: translate3d(0,0,0);
+	transform: translate3d(0,0,0);
 }
 
 .bt-menu ul {

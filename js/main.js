@@ -5,8 +5,13 @@
         "Une erreur critique vient de se produire," + //Spreading mail adress in order to provide bots from getting it.
         "veuillez contacter l'administrateur à cette adresse mail : ";
 
+    $(document).ready(function() {
 
+        setTimeout(function(){
+            $('body').addClass('loaded');
+        }, 100);
 
+    });
 
     $(() => {
         $.ajax({
