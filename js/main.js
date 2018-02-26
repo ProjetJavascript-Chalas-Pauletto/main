@@ -5,12 +5,18 @@
         "Une erreur critique vient de se produire," + //Spreading mail adress in order to provide bots from getting it.
         "veuillez contacter l'administrateur à cette adresse mail : ";
 
+
+
+
     $(() => {
         $.ajax({
             url: '../json/isLogged.php'
         }).done(function (data) {
             if (data.result) {
                 $('#logout-form').show();
+                $('#bt-menu').show();
+                $('#job').show();
+
             } else {
                 $('#login-form').show();
             }

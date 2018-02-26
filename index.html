@@ -10,10 +10,11 @@
         <link rel="manifest" href="site.webmanifest">
         <link rel="apple-touch-icon" href="icon.png">
         <!-- Place favicon.ico in the root directory -->
-
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
         <link rel="stylesheet" href="css/normalize.css">
         <link rel="stylesheet" href="css/main.css">
         <link rel="stylesheet" href="css/style3.css" />
+
         <script src="js/modernizr.custom.js"></script>
     </head>
     <body>
@@ -26,31 +27,47 @@
                 <p id="logMsg"></p>
             </form>
 
-            <form id="logout-form" action="/json/logout.php" style="display: none">
-                <input class="form-control" type="submit" value="Deconnexion"/>
-            </form>
-
-            <nav id="bt-menu" class="bt-menu">
+            <nav id="bt-menu" class="bt-menu" style="display: none">
                 <a href="#" class="bt-menu-trigger"><span>Menu</span></a>
                 <ul>
                     <li><a href="#" class="bt-icon icon-user-outline">Character</a></li>
                     <li><a href="#" class="bt-icon icon-sun">Skills</a></li>
-                    <li><a href="#" class="bt-icon icon-windows">Jobs</a></li>
-                    <li><a href="#" class="bt-icon icon-speaker">Map</a></li>
-                    <li><a href="#" class="bt-icon icon-star">Inventory</a></li>
+                    <li><a href="#" id="bt-jobs" class="bt-icon icon-windows">Jobs</a></li>
+                    <li><a href="#" id="bt-map" class="bt-icon icon-speaker">Map</a></li>
+                    <li><a href="#" id="bt-inventory" class="bt-icon icon-star">Inventory</a></li>
                     <li><a href="#" class="bt-icon icon-bubble">Logout</a></li>
                 </ul>
+                <form id="logout-form" action="/json/logout.php" style="display: none">
+                    <input class="form-control" type="submit" value="Deconnexion"/>
+                </form>
+                <!--
+                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                    <strong>Welcome Back !</strong> Message...
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                -->
             </nav>
+
+
+            <div id="job" style="display: none">
+                <button id="click">Click</button>
+
+            </div>
 
         </div>
 
 
         <script src="js/vendor/modernizr-3.5.0.min.js"></script>
         <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
         <script>window.jQuery || document.write('<script src="js/vendor/jquery-3.2.1.min.js"><\/script>')</script>
         <script src="js/plugins.js"></script>
         <script src="js/main.js"></script>
         <script src="js/borderMenu.js"></script>
         <script src="js/classie.js"></script>
+        <script src="js/jobs.js"></script>
     </body>
 </html>

@@ -7,8 +7,10 @@
 }
 
 body  {
-	background: #2980b9;
+    background: #2980b9;
+
 }
+
 
 .container {
 	padding: 80px;
@@ -116,6 +118,17 @@ body  {
 .bt-menu-open .bt-menu-trigger span:after {
 	-webkit-transform: translateY(350%);
 	transform: translateY(350%);
+}
+
+.bt-menu #logout-form {
+    position: fixed;
+    right: 0;
+    top: 0;
+    -webkit-transition: height 0s 0.3s;
+    transition: height 0s 0.3s;
+}
+
+.bt-menu.bt-menu-open #logout-form {
 }
 
 .bt-menu ul {
