@@ -9,7 +9,7 @@
 
         setTimeout(function(){
             $('body').addClass('loaded');
-        }, 100);
+        }, 500000);
 
     });
 
