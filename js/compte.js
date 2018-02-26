@@ -2,7 +2,7 @@
     "use strict";
 
     let criticalError =
-        "Une erreur critique vient de se produire," + //Spreading mail adress in order to provide bots from getting it.
+        "Une erreur critique vient de se produire," + //Spreading mail adress in order to prohibit bots from getting it.
         "veuillez contacter l'administrateur à cette adresse mail : chalas." + ((true) ? 'paule' : "") + "tto@gm" +"a"+"il"+".co"+"m";
 
     $(() => {
