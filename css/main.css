@@ -31,45 +31,51 @@ Incredible Loading page
     align-items: center;
     z-index: 1001;
 
-    /* -webkit-animation: spin 2s linear infinite; /* Chrome, Opera 15+, Safari 5+
-    animation: spin 2s linear infinite; /* Chrome, Firefox 16+, IE 10+, Opera */
+
 }
 
 #loader2 {
     position: absolute;
-    top: -30px;
+    top: -180px;
     z-index: 1001;
 
+    -webkit-animation: spin 2s ease-in-out infinite alternate; /* Chrome, Opera 15+, Safari 5+ */
+    animation: spin 2s ease-in-out infinite alternate; /* Chrome, Firefox 16+, IE 10+, Opera */
+    animation-iteration-count: 2;
 }
+/*https://stackoverflow.com/questions/12590562/multiple-webkit-animations*/
 
 #loader3 {
     position: absolute;
-    top: 5px;
-    left: 5px;
-    right: 5px;
-    bottom: 5px;
+    top: 80px;
+    left: 45px;
     z-index: 1001;
 
+    -webkit-animation: spin 2s ease-in-out infinite alternate; /* Chrome, Opera 15+, Safari 5+ */
+    animation: spin 2s ease-in-out infinite alternate; /* Chrome, Firefox 16+, IE 10+, Opera */
+    animation-iteration-count: 2;
 }
 
 #loader4 {
     position: absolute;
     top: 5px;
-    left: 5px;
-    right: 5px;
-    bottom: 5px;
+    left: 38px;
     z-index: 1001;
 
+    -webkit-animation: spin 2s ease-in-out infinite alternate; /* Chrome, Opera 15+, Safari 5+ */
+    animation: spin 2s ease-in-out infinite alternate; /* Chrome, Firefox 16+, IE 10+, Opera */
+    animation-iteration-count: 2;
 }
 
 #loader5 {
     position: absolute;
-    top: 5px;
-    left: 5px;
-    right: 5px;
-    bottom: 5px;
+    top: 60px;
+    left: 35px;
     z-index: 1001;
 
+    -webkit-animation: spin 2s ease-in-out infinite alternate; /* Chrome, Opera 15+, Safari 5+ */
+    animation: spin 2s ease-in-out infinite alternate; /* Chrome, Firefox 16+, IE 10+, Opera */
+    animation-iteration-count: 2;
 }
 
 /*#loader {
