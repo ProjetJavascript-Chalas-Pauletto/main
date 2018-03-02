@@ -19,6 +19,7 @@
     </head>
     <body>
 
+        <!-- LOADING ANIMATION -->
         <div id="loader-wrapper">
             <div id="loader">
                 <img src="img/Ozenix%20LogoSplit_1.png">
@@ -38,12 +39,14 @@
 
             <div class="loader-section section-left"></div>
             <div class="loader-section section-right"></div>
-
         </div>
 
         <div class="container">
             <!-- GameContent -->
             <h1>SALUT GROS BEAU GOSSE</h1>
+            <div id="gridTest"></div>
+
+
             <form id="login-form" action="/json/login.php" method="post" style="display: none">
                 <input type="text" name="username" />
                 <input type="password" name="password" />
@@ -64,6 +67,7 @@
                 <form id="logout-form" action="/json/logout.php" style="display: none">
                     <input class="form-control" type="submit" value="Deconnexion"/>
                 </form>
+
                 <!--
                 <div class="alert alert-warning alert-dismissible fade show" role="alert">
                     <strong>Welcome Back !</strong> Message...
@@ -90,6 +94,7 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
         <script>window.jQuery || document.write('<script src="js/vendor/jquery-3.2.1.min.js"><\/script>')</script>
         <script src="js/plugins.js"></script>
+        <script src="js/grid.js"></script>
         <script src="js/main.js"></script>
         <script src="js/borderMenu.js"></script>
         <script src="js/classie.js"></script>
