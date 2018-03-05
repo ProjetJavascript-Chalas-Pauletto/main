@@ -41,7 +41,9 @@
                 let text = document.createTextNode(title);
                 header.appendChild(text);
                 overlay.appendChild(header);
+                return true;
             }
+            return false;
         }
 
         //Open Jobs Panel
@@ -56,7 +58,12 @@
 
         //Open Map Panel
         $("#bt-map").on(eventtype, function(){
-            openPanel("World Map", "map-panel");
+            if (openPanel("World Map", "map-panel")){
+                let map = document.createElement("div");
+                map.setAttribute("id", "map");
+                overlay.appendChild(map);
+                new Grid(30,30, '#map');
+            }
         });
 
         //Open Skills Panel

@@ -1,6 +1,28 @@
 /*! HTML5 Boilerplate v6.0.1 | MIT License | https://html5boilerplate.com/ */
 
 /* ==========================================================================
+Map
+========================================================================== */
+
+
+.case-blanche {
+background-color: grey;
+border: solid 1px white;
+color: white;
+height: 20px;
+width: 20px;
+text-align: center;
+}
+.case-noire {
+background-color: grey;
+border: solid 1px black;
+color: black;
+height: 20px;
+width: 20px;
+text-align: center;
+}
+
+/* ==========================================================================
 Incredible Loading page
 ========================================================================== */
 #loader-wrapper {

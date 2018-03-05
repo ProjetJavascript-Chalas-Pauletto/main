@@ -58,11 +58,9 @@
 
         setTimeout(function(){
             $('body').addClass('loaded');
-        }, 6600);
+        }, 100); //6600
 
-
-        new Grid(10,10, '#gridTest');
-        $('.case-blanche').css(css_blanc).hover(function () {
+        /* $('.case-blanche').css(css_blanc).hover(function () {
             $(this).css(css_enhanced);
         }, function () {
             $(this).css(css_blanc);
@@ -72,7 +70,7 @@
             $(this).css(css_enhanced);
         }, function () {
             $(this).css(css_noir);
-        });
+        }); */
 
     });
 
@@ -88,8 +86,7 @@
                 $('#job').show();
 
             } else { // User not connected
-                $('#login-form').show();
-                $('#accountCreationForm').show();
+                $('#notConnected').show();
                 $('#loader-wrapper').remove(); // Delete loading animation
             }
         }).fail(function () {
