@@ -54,6 +54,22 @@
                 <p id="logMsg"></p>
             </form>
 
+            <div class="container" id="containerLogIn" align="center">
+                <h1>Account creation</h1>
+                <div id="errorLogin" class="alert alert-danger" style="display: none"></div>
+                <form action="/json/creationCompte.php" method="post" id="accountCreationForm">
+                    <label for="username">Username</label>
+                    <input type="text" id="username" name="username"/><br/>
+                    <label for="mail">Mail</label>
+                    <input type="email" id="mail" name="mail"/><br/>
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password"/><br/>
+                    <label for="passwordCheck">Password verification</label>
+                    <input type="password" id="passwordCheck" name="passwordCheck"/><br/>
+                    <input type="submit" value="Create account"/>
+                </form>
+            </div>
+
             <nav id="bt-menu" class="bt-menu" style="display: none">
                 <a href="#" class="bt-menu-trigger"><span>Menu</span></a>
                 <ul>
