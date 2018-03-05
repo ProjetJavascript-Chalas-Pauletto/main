@@ -2,9 +2,23 @@
     "use strict";
 
     let cssError = {
-        'background-color' :'#d3d3d3',
+        'background-color' :'#eeeeee',
         'border' : 'solid 1px red'
     };
+
+    let cssClear = {
+        'background-color' : 'white',
+        'border-style' : 'inset',
+        'border-color' : 'initial',
+        'border-image' : 'initial'
+    };
+
+    function resetAppearance() {
+        $('#username').css(cssClear);
+        $('#passwordCheck').css(cssClear);
+        $('#password').css(cssClear);
+        $('#mail').css(cssClear);
+    }
 
     let criticalError =
         "Une erreur critique vient de se produire," + //Spreading mail adress in order to prohibit bots from getting it.
@@ -12,6 +26,7 @@
 
     $(() => {
         $('#accountCreationForm').submit(function () {
+            resetAppearance();
             $.ajax({
                 url: $(this).attr('action'),
                 method: $(this).attr('method'),
@@ -19,8 +34,7 @@
             })
                 .done(function (data) {
                     if(data.result) {
-                        $('#accountCreationForm').hide();
-                        $('body').html("Things went right !");
+                        $('#containerLogIn').slideUp();
                     } else {
                         switch (data.message){
                             case 'Username already used' :
