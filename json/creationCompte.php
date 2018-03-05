@@ -31,7 +31,7 @@ if ($_POST['username'] != "" && $_POST['password'] != "" && $_POST['passwordChec
 
     if($stmtU->rowCount() !=0){
         $resultat->result=false;
-
+        $resultat->message="Username already used";
     }
 
     $sql2 = 'SELECT * FROM USER WHERE EMAIL = :email';
@@ -49,11 +49,13 @@ if ($_POST['username'] != "" && $_POST['password'] != "" && $_POST['passwordChec
     }
     if ($stmtE->rowCount() != 0){
         $resultat->result=false;
+        $resultat->message="Mail address already used";
     }
 
     if($resultat->result){
 
         $password = md5($password);
+
 
         $sql3 = "INSERT INTO USER (USERNAME, PASSWORD, EMAIL) VALUES (:username, :password, :email)";
         $stmt3 = $pdo->prepare($sql3);
@@ -73,11 +75,10 @@ if ($_POST['username'] != "" && $_POST['password'] != "" && $_POST['passwordChec
 
     } else {
         $resultat->result = false;
-        $resultat->message = "Account creation error : Username or mail already used";
     }
 } else {
     $resultat->result = false;
-    $resultat->message = "Account creation error : Password may be invalid";
+    $resultat->message = "Password don't match";
 }
 
 header('Cache-Control: no-cache, must-revalidate');
