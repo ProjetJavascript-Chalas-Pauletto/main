@@ -44,11 +44,11 @@
         <div class="container">
             <!-- GameContent -->
             <h1>SALUT GROS BEAU GOSSE</h1>
-            <div id="gridTest"></div>
+            <div id="map"></div>
 
 
             <div id="notConnected" align="center" style="display: none">
-                <h1>Account creation</h1>
+                <h1>Log In ma boi</h1>
                 <form id="login-form" action="/json/login.php" method="post">
                     <input type="text" name="username" />
                     <input type="password" name="password" />
@@ -57,7 +57,7 @@
                 </form>
 
                 <h1>Account creation</h1>
-                <div id="errorLogin" class="alert alert-danger"></div>
+                <div id="errorLogin" class="alert alert-danger" style="display:none"></div>
                 <form action="/json/accountCreation.php" method="post" id="accountCreationForm">
                     <label for="username">Username</label>
                     <input type="text" id="username" name="username"/><br/>
@@ -113,7 +113,7 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
         <script>window.jQuery || document.write('<script src="js/vendor/jquery-3.2.1.min.js"><\/script>')</script>
         <script src="js/plugins.js"></script>
-        <script src="js/grid.js"></script>
+        <script src="js/mapM.js"></script>
         <script src="js/main.js"></script>
         <script src="js/borderMenu.js"></script>
         <script src="js/classie.js"></script>

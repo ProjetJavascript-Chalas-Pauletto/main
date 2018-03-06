@@ -56,13 +56,48 @@
             openPanel("Inventory", "inventory-panel");
         });
 
+        //Part dedicated to the map
+
+        let css_lake = {
+            'background-image' :"url('/img/sprites/lake50.png')",
+            'width' : '50px',
+            'height' : '50px',
+            'display' : 'inline-block'
+        };
+
+        let css_village = {
+            'background-image' :"url('/img/sprites/village50.png')",
+            'width' : '50px',
+            'height' : '50px',
+            'display' : 'inline-block'
+        };
+
+        let css_forest = {
+            'background-image' :"url('/img/sprites/forest50.png')",
+            'width' : '50px',
+            'height' : '50px',
+            'display' : 'inline-block'
+        };
+
         //Open Map Panel
         $("#bt-map").on(eventtype, function(){
             if (openPanel("World Map", "map-panel")){
                 let map = document.createElement("div");
                 map.setAttribute("id", "map");
                 overlay.appendChild(map);
-                new Grid(30,30, '#map');
+                $.ajax({
+                    url: '../json/mapDB.php',
+                    data: $(this).serialize(),
+                })
+                    .done(function (data) {
+                        new MapM(5,5,'#map',data);
+                        $(".lake_case").css(css_lake);
+                        $(".village_case").css(css_village);
+                        $(".forest_case").css(css_forest);
+                    })
+                    .fail(function () {
+                        $("body").html(erreurCritique);
+                    });
             }
         });
 
