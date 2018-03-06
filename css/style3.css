@@ -44,6 +44,9 @@ body  {
 	position: absolute;
 	width: 100%;
 	opacity: 0;
+	display: grid;
+    grid-template-columns: auto auto;
+	overflow: auto;
 	-webkit-transition: opacity 0.3s;
 	transition: opacity 0.3s;
 }

@@ -37,10 +37,10 @@
             }
             if(!samePanel) { //Si on ouvre pas le meme panel
                 overlay.classList.add(id);
-                let header = document.createElement("H1");
-                let text = document.createTextNode(title);
-                header.appendChild(text);
-                overlay.appendChild(header);
+                //let header = document.createElement("H1");
+                //let text = document.createTextNode(title);
+                //header.appendChild(text);
+                //overlay.appendChild(header);
                 return true;
             }
             return false;
@@ -48,12 +48,23 @@
 
         //Open Jobs Panel
         $("#bt-jobs").on(eventtype, function(){
-            openPanel("Jobs", "jobs-panel");
+            if(openPanel("Jobs", "jobs-panel")){
+                for (var i = 0; i < 8; i++) {
+                    let job = document.createElement(("div"));
+                    job.setAttribute("class", 'jobSkill')
+                    overlay.appendChild(job);
+                }
+            }
         });
 
         //Open Inventory Panel
         $("#bt-inventory").on(eventtype, function(){
-            openPanel("Inventory", "inventory-panel");
+            if(openPanel("Inventory", "inventory-panel")){
+                let slots = document.createElement("div");
+                slots.setAttribute("id", "inventorySlots");
+                overlay.appendChild(slots);
+                new Grid(10,10, '#inventorySlots');
+            }
         });
 
         //Open Map Panel
