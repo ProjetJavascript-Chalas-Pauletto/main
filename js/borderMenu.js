@@ -51,7 +51,17 @@
             if(openPanel("Jobs", "jobs-panel")){
                 for (var i = 0; i < 8; i++) {
                     let job = document.createElement(("div"));
-                    job.setAttribute("class", 'jobSkill')
+                    job.setAttribute("class", 'jobSkill');
+                    let exp = document.createElement(("div"));
+                    exp.setAttribute("class", 'progress');
+                    let progress = document.createElement('div');
+                    progress.setAttribute("class", "progress-bar progress-bar-striped progress-bar-animated");
+                    progress.setAttribute("style", "width: " + i*(100/8) + "%");
+                    let text = document.createTextNode(i*(100/8) + "%");
+                    progress.appendChild(text);
+                    exp.appendChild(progress);
+                    job.appendChild(exp);
+
                     overlay.appendChild(job);
                 }
             }
