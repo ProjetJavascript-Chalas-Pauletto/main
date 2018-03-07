@@ -86,8 +86,7 @@
                 map.setAttribute("id", "map");
                 overlay.appendChild(map);
                 $.ajax({
-                    url: '../json/mapDB.php',
-                    data: $(this).serialize(),
+                    url: '../json/mapDB.php'
                 })
                     .done(function (data) {
                         new MapM(5,5,'#map',data);
