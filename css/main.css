@@ -10,7 +10,7 @@ INVENTORY
     grid-row-end: 3;
 }
 
-.ressourcesInventory{
+.resourcesInventory{
 
 }
 .itemsInventory {
@@ -29,6 +29,11 @@ JOBS
 
 .jobSkill:hover {
     background: #555555;
+}
+
+.jobSkill img{
+    max-width:90%;
+    max-height:90%;
 }
 
 
@@ -309,15 +314,47 @@ animation: fadeIn 1s ease-out ,spin 2s ease-in-out infinite ; /* Chrome, Firefox
    Base styles: opinionated defaults
    ========================================================================== */
 
-html {
+html,body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+html{
     color: #222;
     font-size: 1em;
     line-height: 1.4;
 }
 
-.container{
+.game{
     user-select: none;
+    height:100%;
+
+    display: grid;
+    grid-template-columns: 25% 50% 25%;
+    grid-template-rows: auto 20%;
 }
+
+.gameLeft{
+    background: #2980b9;
+}
+
+.gameMiddle{
+    background: #333333;
+}
+
+.gameRight{
+    background: yellow;
+}
+
+.gameBottom{
+    background: crimson;
+    grid-column-start: 1;
+    grid-column-end: 4;
+}
+
+
+
 
 
 

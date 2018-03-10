@@ -41,70 +41,71 @@
             <div class="loader-section section-right"></div>
         </div>
 
-        <div class="container">
+        <div id="notConnected" align="center" style="display: none">
+            <h1>Log In</h1>
+            <form id="login-form" action="/json/login.php" method="post">
+                <input type="text" name="username" />
+                <input type="password" name="password" />
+                <input class="btn btn-light" type="submit" value="Connexion"/>
+                <p id="logMsg"></p>
+            </form>
+
+            <h1>Account creation</h1>
+            <div id="errorLogin" class="alert alert-danger" style="display:none"></div>
+            <form action="/json/accountCreation.php" method="post" id="accountCreationForm">
+                <label for="username">Username</label>
+                <input type="text" id="username" name="username"/><br/>
+                <label for="mail">Mail</label>
+                <input type="email" id="mail" name="mail"/><br/>
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password"/><br/>
+                <label for="passwordCheck">Password verification</label>
+                <input type="password" id="passwordCheck" name="passwordCheck"/><br/>
+                <input type="submit" value="Create account"/>
+            </form>
+        </div>
+
+        <div class="game">
             <!-- GameContent -->
-            <h1>SALUT GROS BEAU GOSSE</h1>
-            <div id="gridTest"></div>
+            <div class="gameLeft"></div>
 
-
-            <div id="notConnected" align="center" style="display: none">
-                <h1>Log In</h1>
-                <form id="login-form" action="/json/login.php" method="post">
-                    <input type="text" name="username" />
-                    <input type="password" name="password" />
-                    <input class="btn btn-light" type="submit" value="Connexion"/>
-                    <p id="logMsg"></p>
-                </form>
-
-                <h1>Account creation</h1>
-                <div id="errorLogin" class="alert alert-danger" style="display:none"></div>
-                <form action="/json/accountCreation.php" method="post" id="accountCreationForm">
-                    <label for="username">Username</label>
-                    <input type="text" id="username" name="username"/><br/>
-                    <label for="mail">Mail</label>
-                    <input type="email" id="mail" name="mail"/><br/>
-                    <label for="password">Password</label>
-                    <input type="password" id="password" name="password"/><br/>
-                    <label for="passwordCheck">Password verification</label>
-                    <input type="password" id="passwordCheck" name="passwordCheck"/><br/>
-                    <input type="submit" value="Create account"/>
-                </form>
-
-
-            </div>
-
-            <nav id="bt-menu" class="bt-menu" style="display: none">
-                <a href="#" class="bt-menu-trigger"><span>Menu</span></a>
-                <ul>
-                    <li><a href="#" class="bt-icon icon-user-outline">Character</a></li>
-                    <li><a href="#" id="bt-jobs" class="bt-icon icon-windows">Jobs</a></li>
-                    <li><a href="#" id="bt-skills" class="bt-icon icon-sun">Skills</a></li>
-                    <li><a href="#" id="bt-inventory" class="bt-icon icon-star">Inventory</a></li>
-                    <li><a href="#" id="bt-map" class="bt-icon icon-speaker">Map</a></li>
-                    <li><a href="#" class="bt-icon icon-bubble">Logout</a></li>
-                </ul>
-                <form id="logout-form" action="/json/logout.php" style="display: none">
-                    <input class="form-control" type="submit" value="Deconnexion"/>
-                </form>
-
-                <!--
-                <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                    <strong>Welcome Back !</strong> Message...
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
+            <div class="gameMiddle">
+                <div id="job" style="display: none">
+                    <button id="click">Click</button>
+                    <img src="">
                 </div>
-                -->
-            </nav>
-
-
-
-            <div id="job" style="display: none">
-                <button id="click">Click</button>
-
             </div>
+
+            <div class="gameRight"></div>
+
+            <div class="gameBottom"></div>
 
         </div>
+
+
+        <nav id="bt-menu" class="bt-menu" style="display: none">
+            <a href="#" class="bt-menu-trigger"><span>Menu</span></a>
+            <ul>
+                <li><a href="#" class="bt-icon icon-user-outline">Character</a></li>
+                <li><a href="#" id="bt-jobs" class="bt-icon icon-windows">Jobs</a></li>
+                <li><a href="#" id="bt-skills" class="bt-icon icon-sun">Skills</a></li>
+                <li><a href="#" id="bt-inventory" class="bt-icon icon-star">Inventory</a></li>
+                <li><a href="#" id="bt-map" class="bt-icon icon-speaker">Map</a></li>
+                <li><a href="#" class="bt-icon icon-bubble">Logout</a></li>
+            </ul>
+            <form id="logout-form" action="/json/logout.php" style="display: none">
+                <input class="form-control" type="submit" value="Deconnexion"/>
+            </form>
+
+            <!--
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                <strong>Welcome Back !</strong> Message...
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            -->
+        </nav>
 
 
         <script src="js/vendor/modernizr-3.5.0.min.js"></script>

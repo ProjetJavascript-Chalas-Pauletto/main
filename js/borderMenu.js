@@ -60,8 +60,12 @@
                     let text = document.createTextNode(i*(100/8) + "%");
                     progress.appendChild(text);
                     exp.appendChild(progress);
-                    job.appendChild(exp);
 
+                    //Add image skill
+                    let icon = document.createElement('img');
+                    icon.setAttribute("src", "img/jobs/lumberjack.png");
+                    job.appendChild(exp);
+                    job.appendChild(icon);
                     overlay.appendChild(job);
                 }
             }
