@@ -84,6 +84,7 @@
             if (openPanel("World Map", "map-panel")){
                 let map = document.createElement("div");
                 map.setAttribute("id", "map");
+                map.setAttribute("align", "center");
                 overlay.appendChild(map);
                 $.ajax({
                     url: '../json/mapDB.php',
