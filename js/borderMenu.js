@@ -74,10 +74,21 @@
         //Open Inventory Panel
         $("#bt-inventory").on(eventtype, function(){
             if(openPanel("Inventory", "inventory-panel")){
-                let slots = document.createElement("div");
+                let characterInventory = document.createElement("div");
+                let resourcesInventory = document.createElement("div");
+                let itemsInventory = document.createElement("div");
+                characterInventory.setAttribute("class", "characterInventory");
+                resourcesInventory.setAttribute("class", "resourcesInventory");
+                itemsInventory.setAttribute("class", "itemsInventory");
+
+
+                overlay.appendChild(characterInventory);
+                overlay.appendChild(resourcesInventory);
+                overlay.appendChild(itemsInventory);
+                /*let slots = document.createElement("div");
                 slots.setAttribute("id", "inventorySlots");
                 overlay.appendChild(slots);
-                new Grid(10,10, '#inventorySlots');
+                new Grid(10,10, '#inventorySlots');*/
             }
         });
 

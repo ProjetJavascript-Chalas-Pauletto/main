@@ -5,16 +5,15 @@ INVENTORY
 ========================================================================== */
 
 .characterInventory{
-    display: inline-grid;
     grid-row-start: 1;
     grid-row-end: 3;
+    background: #2980b9;
 }
 
 .resourcesInventory{
-
+    background: yellow;
 }
 .itemsInventory {
-
 }
 
 /* ==========================================================================
