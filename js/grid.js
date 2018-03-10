@@ -29,10 +29,10 @@ let Grid;
         };
 
         let creer_case_noire = function(x,y, value) {
-            return $('<td />').data('x', x).data('y', y).data('state', 0).data('value', value).addClass('case-noire').html(' ').click(open_slot);
+            return $('<td />').data('x', x).data('y', y).data('state', 0).data('value', value).addClass('slot').html(' ').click(open_slot);
         };
         let creer_case_blanche = function(x,y, value) {
-            return $('<td />').data('x', x).data('y', y).data('state', 0).data('value', value).addClass('case-blanche').html(' ').click(open_slot);
+            return $('<td />').data('x', x).data('y', y).data('state', 0).data('value', value).addClass('slot').html(' ').click(open_slot);
         };
 
         for (let i = 0; i < this.largeur; ++i){

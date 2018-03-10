@@ -10,10 +10,28 @@ INVENTORY
     background: #2980b9;
 }
 
+.characterInventory  div {
+    width: 10%;
+    height: 10%;
+    background: #555555;
+    border: 1px solid yellow;
+}
+
 .resourcesInventory{
     background: yellow;
 }
 .itemsInventory {
+    overflow: auto;
+}
+
+.slot {
+    background-color: grey;
+    border: solid 1px white;
+    color: white;
+    height: 100px;
+    width: 100px;
+    padding: 10px;
+    text-align: center;
 }
 
 /* ==========================================================================
@@ -41,22 +59,7 @@ Map
 ========================================================================== */
 
 
-.case-blanche {
-background-color: grey;
-border: solid 1px white;
-color: white;
-height: 20px;
-width: 20px;
-text-align: center;
-}
-.case-noire {
-background-color: grey;
-border: solid 1px black;
-color: black;
-height: 20px;
-width: 20px;
-text-align: center;
-}
+
 
 /* ==========================================================================
 Incredible Loading page

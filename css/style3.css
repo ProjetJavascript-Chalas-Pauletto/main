@@ -29,6 +29,13 @@ body  {
 	-webkit-backface-visibility: hidden;
 	-webkit-transition: border-width 0.3s, background-color 0.3s, height 0s 0.3s;
 	transition: border-width 0.3s, background-color 0.3s, height 0s 0.3s;
+
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
 }
 
 .bt-menu.bt-menu-open {
@@ -45,7 +52,6 @@ body  {
 	width: 100%;
 	opacity: 0;
 	display: grid;
-    grid-template-columns: auto auto;
 	overflow: auto;
 	-webkit-transition: opacity 0.3s;
 	transition: opacity 0.3s;
@@ -54,11 +60,14 @@ body  {
 .jobs-panel {
 	opacity: 1;
 	background: darkslategray;
+	grid-template-columns: auto auto;
 }
 
 .inventory-panel {
 	opacity: 1;
 	background: darkmagenta;
+	grid-template-columns: 50% auto;
+	grid-template-rows: 50% auto;
 }
 
 .map-panel {
@@ -98,12 +107,6 @@ body  {
 	font-size: 0px;
 	-webkit-transition: background-color 0.3s;
 	transition: background-color 0.3s;
-	-webkit-touch-callout: none;
-	-webkit-user-select: none;
-	-khtml-user-select: none;
-	-moz-user-select: none;
-	-ms-user-select: none;
-	user-select: none;
 }
 
 .bt-menu-open .bt-menu-trigger span {

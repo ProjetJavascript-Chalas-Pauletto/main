@@ -49,7 +49,7 @@
         //Open Jobs Panel
         $("#bt-jobs").on(eventtype, function(){
             if(openPanel("Jobs", "jobs-panel")){
-                for (var i = 0; i < 8; i++) {
+                for (let i = 0; i < 8; i++) {
                     let job = document.createElement(("div"));
                     job.setAttribute("class", 'jobSkill');
                     let exp = document.createElement(("div"));
@@ -81,14 +81,23 @@
                 resourcesInventory.setAttribute("class", "resourcesInventory");
                 itemsInventory.setAttribute("class", "itemsInventory");
 
+                //CharacterInventory
+                for (let i = 0; i < 8; i++) {
+                    let characterSlot = document.createElement("div");
+                    characterSlot.setAttribute("class", "slot" + i);
+                    characterInventory.appendChild(characterSlot);
+                }
+
+                //RessourcesInventory
+
 
                 overlay.appendChild(characterInventory);
                 overlay.appendChild(resourcesInventory);
                 overlay.appendChild(itemsInventory);
-                /*let slots = document.createElement("div");
-                slots.setAttribute("id", "inventorySlots");
-                overlay.appendChild(slots);
-                new Grid(10,10, '#inventorySlots');*/
+
+                //itemInventory
+                new Grid(10,10, '.itemsInventory');
+
             }
         });
 
