@@ -11,7 +11,7 @@ let MapM;
 
         $('.indicateur').html('slt');
 
-        function isMoving() {
+        this.isMoving = function () {
             $.ajax({
                 url: '/json/isMoving.php'
             })
@@ -25,7 +25,9 @@ let MapM;
                     $('body').html(data.msg);
                 })
             ;
-        }
+        };
+
+        let timeCheck = function() {setTimeout(self.isMoving(),data.timeLength);};
 
         this.click_case = function () {
             let x = $(this).data('x');
@@ -42,9 +44,7 @@ let MapM;
                         })
                             .done(function (data) {
                                 if (data.result){
-                                    let timeCheck = setTimeout(function () {
-                                        isMoving();
-                                    },data.timeLength)
+                                    timeCheck();
                                 } else {
                                     $('body').html(data.msg);
                                 }
@@ -53,7 +53,7 @@ let MapM;
                                 $('body').html(data.msg);
                             });
                     } else {
-                        isMoving();
+                        self.isMoving();
                     }
                 }).fail(function () {
                 $('body').html(data.msg);
