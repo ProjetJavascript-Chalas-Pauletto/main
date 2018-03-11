@@ -89,6 +89,7 @@
                 }
 
                 //RessourcesInventory
+                new Inventory();
 
 
                 overlay.appendChild(characterInventory);
