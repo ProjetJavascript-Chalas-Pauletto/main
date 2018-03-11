@@ -20,14 +20,14 @@ try
 {
     $stmtMove->execute();
 
-    if($stmtMove->rowCount() == 1){
+    if($stmtMove->rowCount() == 1){ //Si un trajet est en cours
         $stmtMove->setFetchMode(PDO::FETCH_ASSOC);
         $tmp = $stmtMove->fetch();
         $resultat->pos['POS_X_DEST'] = $tmp['POS_X']; $resultat->pos['POS_Y_DEST'] = $tmp['POS_Y'];
         $timeStart = $tmp['TIME_START'];
-        $timeLength = $tmp['TIME_LENGTH'] . '0';
+        $timeLength = $tmp['TIME_LENGTH'];
 
-        if (date('Y-m-d H:i:s',strtotime($timeStart) + $timeLength) < date("Y-m-d H:i:s")){
+        if ($timeStart + $timeLength < $_POST['TIME']){ //Si trajet terminé
 
             $sqlDelete = "DELETE FROM PATH WHERE ID_PLAYER = :id";
             $stmtDelete = $pdo->prepare($sqlDelete);
@@ -44,15 +44,16 @@ try
 
             $stmtUpdate->execute();
             $resultat->result = false;
-            $resultat->message = "Moving done";
-        } else {
+            $resultat->message = "Travel finished";
+
+        } else { //Trajet non terminé
             $resultat->result = true;
             $resultat->message = "Still moving";
-            $resultat->time = strtotime($timeStart) + $timeLength - strtotime(date("Y-m-d H:i:s"));
+            $resultat->timeLeft = $timeStart + $timeLength - $_POST['TIME'];
         }
-    } else {
+    } else { //Aucun trajet en cours
         $resultat->result = false;
-        $resultat->message ="Moving done";
+        $resultat->message ="No travel yet";
     }
 
 

@@ -7,18 +7,22 @@ let MapM;
         this.largeur = l || 5;
         let map = $(dest);
         let self = this;
-
-
-        $('.indicateur').html('slt');
+        let timeCheck;
 
         this.isMoving = function () {
             $.ajax({
-                url: '/json/isMoving.php'
+                url: '/json/isMoving.php',
+                type: 'POST',
+                data: {TIME : Date.now()}
             })
                 .done(function (data) {
                     if(data.result){
                         clearTimeout(timeCheck);
-                        setTimeout(timeCheck,data.time)
+                        timeCheck = setTimeout(self.isMoving,data.timeLeft);
+                        console.log("Still moving");
+                        console.log("Set isMoving Timeout to : " + data.timeLeft + "ms");
+                    } else{
+                        console.log("Travel finished !");
                     }
                 })
                 .fail(function () {
@@ -27,33 +31,36 @@ let MapM;
             ;
         };
 
-        let timeCheck = function() {setTimeout(self.isMoving(),data.timeLength);};
-
         this.click_case = function () {
             let x = $(this).data('x');
             let y = $(this).data('y');
             $.ajax({
-                url:'/json/isMoving.php'
+                url:'/json/isMoving.php',
+                type: 'POST',
+                data: {TIME : Date.now()}
             })
                 .done(function (data) {
-                    if(!data.result) {
+                    if(!data.result) { // Si n'est pas en déplacement.
                         $.ajax({
                             url:'/json/startMoving.php',
                             type: 'POST',
-                            data: {POS_X_DEST: x, POS_Y_DEST: y}
+                            data: {POS_X_DEST: x, POS_Y_DEST: y, TIME_START: Date.now()}
                         })
                             .done(function (data) {
-                                if (data.result){
-                                    timeCheck();
-                                } else {
+                                if (data.result){ //Si déplacement commencé
+                                    console.log("Travel Started !")
+                                    console.log("Set isMoving Timeout to : " + data.timeLength + "ms");
+                                    timeCheck = setTimeout(self.isMoving, data.timeLength);
+                                } else { // Erreur de déplacement ?
                                     $('body').html(data.msg);
                                 }
                             })
                             .fail(function () {
                                 $('body').html(data.msg);
                             });
-                    } else {
-                        self.isMoving();
+                    } else { // En déplacement, l'utilisateur ne peut pas se déplacer à nouveau, on ne fait RIEN
+                        console.log("You are moving Bastard !")
+                        //self.isMoving();
                     }
                 }).fail(function () {
                 $('body').html(data.msg);
