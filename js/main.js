@@ -52,6 +52,12 @@
         $('#mail').css(cssClear);
     }
 
+    function init(){
+        //console.log("Init game");
+        //console.log("Loading Movement");
+        // TODO
+    }
+
 
 
     $(document).ready(function() {
@@ -84,6 +90,8 @@
                 $('#logout-form').show();
                 $('#bt-menu').show();
                 $('#job').show();
+
+
 
             } else { // User not connected
                 $('#notConnected').show();

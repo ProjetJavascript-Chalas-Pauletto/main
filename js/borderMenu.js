@@ -85,15 +85,28 @@
                 let map = document.createElement("div");
                 map.setAttribute("id", "map");
                 map.setAttribute("align", "center");
+
+                let progress = document.createElement("div");
+                progress.setAttribute("class", "progress")
+                let bar = document.createElement("div");
+                bar.setAttribute("id", "timer");
+                bar.setAttribute("class", "progress-bar progress-bar-striped active");
+                bar.setAttribute("style", "width:0%");
+
+                progress.appendChild(bar);
+
+                overlay.appendChild(progress);
                 overlay.appendChild(map);
                 $.ajax({
                     url: '../json/mapDB.php'
                 })
                     .done(function (data) {
-                        new MapM(5,5,'#map',data);
+                        let map = new MapM(5,5,'#map',data);
                         $(".lake_case").css(css_lake);
                         $(".village_case").css(css_village);
                         $(".forest_case").css(css_forest);
+                        map.isMoving();
+
                     })
                     .fail(function () {
                         $("body").html(erreurCritique);

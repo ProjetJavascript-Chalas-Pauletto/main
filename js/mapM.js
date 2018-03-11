@@ -18,6 +18,7 @@ let MapM;
                 .done(function (data) {
                     if(data.result){
                         clearTimeout(timeCheck);
+                        startTimer(data.timeLeft);
                         timeCheck = setTimeout(self.isMoving,data.timeLeft);
                         console.log("Still moving");
                         console.log("Set isMoving Timeout to : " + data.timeLeft + "ms");
@@ -50,6 +51,7 @@ let MapM;
                                 if (data.result){ //Si déplacement commencé
                                     console.log("Travel Started !")
                                     console.log("Set isMoving Timeout to : " + data.timeLength + "ms");
+                                    startTimer(data.timeLength);
                                     timeCheck = setTimeout(self.isMoving, data.timeLength);
                                 } else { // Erreur de déplacement ?
                                     $('body').html(data.msg);
@@ -67,6 +69,47 @@ let MapM;
             });
 
         };
+
+        let endTime;
+        let timeTravel;
+       // let timer;
+
+        function startTimer(time) {
+            endTime = Date.now() + time;
+            timeTravel = time;
+            //timer = setInterval(setTimer(), 500);
+            setTimer();
+        }
+
+        function setTimer(){
+            let timeLeft = endTime - Date.now();
+            if (timeLeft >= 0){
+                let percentage = 100 - Math.floor(timeLeft * 100 / timeTravel);
+                let hours = Math.floor(timeLeft / 3600000);
+                let minutes = Math.floor((timeLeft % 3600000) / 60000) ;
+                let seconds = Math.ceil((timeLeft % 60000) / 1000) ;
+                minutes = checkTime(minutes);
+                seconds = checkTime(seconds);
+                $("#title").html(hours + ":" + minutes + ":" + seconds + " - Travelling");
+                $("#timer").html(hours + ":" + minutes + ":" + seconds).css("width", percentage + "%");
+                let timer = setTimeout(function(){ setTimer() }, 1000);
+            } else{
+                stopTimer()
+            }
+        }
+        function checkTime(i) {// add a zero in front of numbers<10
+            if (i < 10) {
+                i = "0" + i;
+            }
+            return i;
+        }
+
+        function stopTimer(){
+            $("#title").html("Chilling at 30db");
+            $("#timer").html("Vous voila arrivé mon bon !").css("width", "100%");
+        }
+
+
 
         this.create_forest_case = function (x,y) {
             return $('<div />')
