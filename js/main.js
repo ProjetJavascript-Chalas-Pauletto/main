@@ -98,8 +98,6 @@
                 $('#bt-menu').show();
                 $('#job').show();
 
-
-
             } else { // User not connected
                 $('#notConnected').show();
                 $('#loader-wrapper').remove(); // Delete loading animation

@@ -14,7 +14,7 @@ $pdo = getDb();
 $sqlMove = "SELECT POS_X, POS_Y, TIME_START, TIME_LENGTH FROM PATH WHERE ID_PLAYER = :id";
 
 $stmtMove = $pdo->prepare($sqlMove);
-$stmtMove->bindValue('id', $_SESSION['id'], PDO::PARAM_INT);
+$stmtMove->bindValue('id', $_SESSION['id'] , PDO::PARAM_INT);
 
 try
 {
@@ -34,6 +34,15 @@ try
             $stmtDelete->bindValue('id', $_SESSION['id'], PDO::PARAM_INT);
 
             $stmtDelete->execute();
+
+            $sqlInit = "SELECT POS_X, POS_Y FROM POSITION WHERE ID_PLAYER = :id";
+            $stmtInit = $pdo->prepare($sqlInit);
+            $stmtInit->bindValue('id', $_SESSION['id'], PDO::PARAM_INT);
+
+            $stmtInit->execute();
+            $stmtInit->setFetchMode(PDO::FETCH_ASSOC);
+            $tmpInit = $stmtInit->fetch();
+            $resultat->pos['POS_X_INIT'] = $tmpInit['POS_X']; $resultat->pos['POS_Y_INIT'] = $tmpInit['POS_Y'];
 
             $sqlUpdate = "UPDATE POSITION SET POS_X = :pos_x, POS_Y =:pos_y WHERE ID_PLAYER = :id";
             $stmtUpdate = $pdo->prepare($sqlUpdate);

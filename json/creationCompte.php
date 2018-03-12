@@ -1,6 +1,6 @@
 <?php
 
-require 'connectPDO.php';
+require '../model/database-controller.php';
 
 session_start();
 

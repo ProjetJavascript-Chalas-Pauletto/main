@@ -1,29 +1,38 @@
-let MapM;
+let mapM;
 (function () {
     "use strict";
 
-    MapM = function (h, l, dest, data) {
-        this.hauteur = h || 5;
-        this.largeur = l || 5;
-        let map = $(dest);
-        let self = this;
-        let timeCheck;
+    mapM = class mapM {
 
-        this.isMoving = function () {
+        constructor(height,width,dest,data){
+            this.height = height;
+            this.width = width;
+            this.map = $(dest);
+            this.data = data;
+            this.tab = [];
+            this.timeCheck = null;
+            this.endTime = 0;
+            this.timeTravel = 0;
+
+        }
+
+        isMoving () {
+            let self = this;
             $.ajax({
                 url: '/json/isMoving.php',
                 type: 'POST',
                 data: {TIME : Date.now()}
             })
                 .done(function (data) {
-                    if(data.result){
-                        clearTimeout(timeCheck);
-                        startTimer(data.timeLeft);
-                        timeCheck = setTimeout(self.isMoving,data.timeLeft);
+                    if(data.result){ // If the player is still traveling
+                        clearTimeout(self.timeCheck);
+                        self.timeCheck = setTimeout(self.isMoving,data.timeLeft);
                         console.log("Still moving");
                         console.log("Set isMoving Timeout to : " + data.timeLeft + "ms");
-                    } else{
+                    } else { //When traveling will be done
                         console.log("Travel finished !");
+                        self.tab[data.pos['POS_X_INIT']][data.pos['POS_Y_INIT']].removeAttr("id");
+                        self.tab[data.pos['POS_X_DEST']][data.pos['POS_Y_DEST']].attr("id","posPlayer");
                     }
                 })
                 .fail(function () {
@@ -32,59 +41,33 @@ let MapM;
             ;
         };
 
-        this.click_case = function () {
-            let x = $(this).data('x');
-            let y = $(this).data('y');
+        initPosition () {
+            let self = this;
             $.ajax({
-                url:'/json/isMoving.php',
-                type: 'POST',
-                data: {TIME : Date.now()}
+                url: '/json/whereAmI.php',
             })
                 .done(function (data) {
-                    if(!data.result) { // Si n'est pas en déplacement.
-                        $.ajax({
-                            url:'/json/startMoving.php',
-                            type: 'POST',
-                            data: {POS_X_DEST: x, POS_Y_DEST: y, TIME_START: Date.now()}
-                        })
-                            .done(function (data) {
-                                if (data.result){ //Si déplacement commencé
-                                    console.log("Travel Started !")
-                                    console.log("Set isMoving Timeout to : " + data.timeLength + "ms");
-                                    startTimer(data.timeLength);
-                                    timeCheck = setTimeout(self.isMoving, data.timeLength);
-                                } else { // Erreur de déplacement ?
-                                    $('body').html(data.msg);
-                                }
-                            })
-                            .fail(function () {
-                                $('body').html(data.msg);
-                            });
-                    } else { // En déplacement, l'utilisateur ne peut pas se déplacer à nouveau, on ne fait RIEN
-                        console.log("You are moving Bastard !")
-                        //self.isMoving();
+                    if(data.result){ // If everything went right we look for the player's position
+                        self.tab[data.pos['POS_X']][data.pos['POS_Y']].attr("id","posPlayer");
                     }
-                }).fail(function () {
-                $('body').html(data.msg);
-            });
-
+                })
+                .fail(function () {
+                    return -1; // Shouldn't happen but if it happens we will be able to notice it.
+                })
         };
 
-        let endTime;
-        let timeTravel;
-       // let timer;
 
-        function startTimer(time) {
-            endTime = Date.now() + time;
-            timeTravel = time;
+        startTimer(time) {
+            this.endTime = Date.now() + time;
+            this.timeTravel = time;
             //timer = setInterval(setTimer(), 500);
-            setTimer();
+            this.setTimer();
         }
 
-        function setTimer(){
-            let timeLeft = endTime - Date.now();
+        setTimer() {
+            let timeLeft = this.endTime - Date.now();
             if (timeLeft >= 0){
-                let percentage = 100 - Math.floor(timeLeft * 100 / timeTravel);
+                let percentage = 100 - Math.floor(timeLeft * 100 / this.timeTravel);
                 let hours = Math.floor(timeLeft / 3600000);
                 let minutes = Math.floor((timeLeft % 3600000) / 60000) ;
                 let seconds = Math.ceil((timeLeft % 60000) / 1000) ;
@@ -94,24 +77,52 @@ let MapM;
                 $("#timer").html(hours + ":" + minutes + ":" + seconds).css("width", percentage + "%");
                 let timer = setTimeout(function(){ setTimer() }, 1000);
             } else{
-                stopTimer()
+                this.stopTimer();
             }
-        }
-        function checkTime(i) {// add a zero in front of numbers<10
-            if (i < 10) {
-                i = "0" + i;
-            }
-            return i;
         }
 
-        function stopTimer(){
-            $("#title").html("Chilling at 30db");
+        stopTimer(){
+            $("#title").html("Tranquillement !");
             $("#timer").html("Vous voila arrivé mon bon !").css("width", "100%");
         }
 
+        click_case () {
+            let self = this;
+            let x = $(this).data('x');
+            let y = $(this).data('y');
+            $.ajax({
+                url:'/json/isMoving.php',
+                type: 'POST',
+                data: {TIME : Date.now()}
+            })
+                .done(function (data) {
+                    if(!data.result) { // If the player isn't moving
+                        $.ajax({
+                            url:'/json/startMoving.php',
+                            type: 'POST',
+                            data: {POS_X_DEST: x, POS_Y_DEST: y, TIME_START: Date.now()}
+                        })
+                            .done(function (data) {
+                                if (data.result){ // If the player starts moving
+                                    console.log("Travel Started !");
+                                    console.log("Set isMoving Timeout to : " + data.timeLength + "ms");
+                                    self.timeCheck = setTimeout(self.isMoving, data.timeLength);
+                                } else { // Erreur de déplacement ?
+                                    $('body').html(data.msg);
+                                }
+                            })
+                            .fail(function () {
+                                $('body').html(data.msg);
+                            });
+                    } else { // When the player is moving, we just wait and do nothing else.
+                        console.log("You are already moving !")
+                    }
+                }).fail(function () {
+                $('body').html(data.msg);
+            });
+        };
 
-
-        this.create_forest_case = function (x,y) {
+        create_forest_case (x,y) {
             return $('<div />')
                 .addClass('forest_case')
                 .data('x', x)
@@ -119,7 +130,7 @@ let MapM;
                 .click(self.click_case);
         };
 
-        this.create_village_case = function (x,y) {
+        create_village_case (x,y) {
             return $('<div />')
                 .addClass('village_case')
                 .data('x', x)
@@ -128,7 +139,7 @@ let MapM;
 
         };
 
-        this.create_lake_case = function (x,y) {
+        create_lake_case (x,y) {
             return $('<div />')
                 .addClass('lake_case')
                 .data('x', x)
@@ -136,26 +147,35 @@ let MapM;
                 .click(self.click_case);
         };
 
-        for (let x = 0;x<data.length;++x){
-            let tmpColumn = $('<div />');
+        createMap() {
 
-            for (let y = 0;y<data.length;++y) {
+            let fnAjouteCase = (self, fn, x, y, col) => {
+                let slot = fn(x,y);
+                col.append(slot);
+                self.tab[x].push(slot);
+            };
 
-                switch (data[x][y]) {
-                    case 'FOREST' :
-                        tmpColumn.append(this.create_forest_case(x,y));
-                        break;
-                    case 'LAKE':
-                        tmpColumn.append(this.create_lake_case(x,y));
-                        break;
-                    case 'VILLAGE' :
-                        tmpColumn.append(this.create_village_case(x,y));
-                        break;
-                    default:
-                        $('body').html("ERRRRREUR")
+            let landTypes = {
+                'FOREST': this.create_forest_case,
+                'LAKE': this.create_lake_case,
+                'VILLAGE': this.create_village_case
+            };
+
+            for (let x = 0;x<this.data.length;++x){
+                let tmpColumn = $('<div />');
+                this.tab[x] = [];
+                for (let y = 0;y<this.data.length;++y) {
+                    let land = landTypes [ this.data[x][y] ];
+                    if (typeof(land) !== 'undefined') {
+                        fnAjouteCase(this, land, x,y, tmpColumn);
+                    } else {
+                        $('body').html("Something strange happened");
+                    }
                 }
+                this.map.append(tmpColumn);
             }
-            map.append(tmpColumn);
+            this.initPosition();
         }
+
     };
 }) ();
