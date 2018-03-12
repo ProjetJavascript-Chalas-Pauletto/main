@@ -64,6 +64,13 @@ let mapM;
             this.setTimer();
         }
 
+        checkTime(i) {// add a zero in front of numbers<10
+            if (i < 10) {
+                i = "0" + i;
+            }
+            return i;
+        }
+
         setTimer() {
             let timeLeft = this.endTime - Date.now();
             if (timeLeft >= 0){
@@ -71,8 +78,8 @@ let mapM;
                 let hours = Math.floor(timeLeft / 3600000);
                 let minutes = Math.floor((timeLeft % 3600000) / 60000) ;
                 let seconds = Math.ceil((timeLeft % 60000) / 1000) ;
-                minutes = checkTime(minutes);
-                seconds = checkTime(seconds);
+                minutes = this.checkTime(minutes);
+                seconds = this.checkTime(seconds);
                 $("#title").html(hours + ":" + minutes + ":" + seconds + " - Travelling");
                 $("#timer").html(hours + ":" + minutes + ":" + seconds).css("width", percentage + "%");
                 let timer = setTimeout(function(){ setTimer() }, 1000);
