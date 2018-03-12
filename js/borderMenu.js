@@ -93,9 +93,19 @@
 
 
 
+
+
                 overlay.appendChild(characterInventory);
                 overlay.appendChild(resourcesInventory);
                 overlay.appendChild(itemsInventory);
+
+                let test = $('<p />').attr('id', 'omfg').html('CLIQUE ICI');
+
+                $('.resourcesInventory').append(test);
+
+                $('#omfg').click(function(){
+                    inventory.displayResources();
+                });
 
                 //itemInventory
                 new Grid(10,10, '.itemsInventory');

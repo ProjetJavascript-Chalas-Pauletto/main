@@ -13,7 +13,8 @@ $resources = loadResources();
 
 
 while ($row = $resources->fetch()) {
-    array_push($result->resources, array($row['NAME'], $row['SIZE']));
+    $result->resources[$row["ID"]] = array($row['NAME'], $row['SIZE']);
+    //array_push($result->resources, array($row['NAME'], $row['SIZE']));
 }
 
 

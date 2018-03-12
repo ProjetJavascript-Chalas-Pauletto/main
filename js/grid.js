@@ -53,8 +53,6 @@ let Grid;
             this.destination.append(tr);
         }
 
-        console.log(this.tab);
-
         this.tab[2][1].html("bob");
     }
 

@@ -67,8 +67,6 @@
         }); */
 
 
-
-
     $(() => {
         setTimeout(function(){
             $('body').addClass('loaded');
