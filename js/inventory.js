@@ -6,6 +6,8 @@ let Inventory;
         let resources = [];
         let resourceInventory = [];
 
+        let self = this;
+
         this.loadResources = function () { //Charges les ressources du jeu.
             $.ajax({
                 url: '/json/loadRessources.php'
@@ -23,13 +25,16 @@ let Inventory;
             ;
         };
 
-        this.loadResourcesInventory = function () {
+        this.loadResourcesInventory = function () { //Charges l'inventaire de ressources du joueur.
             $.ajax({
                 url: '/json/loadInventory.php'
             })
                 .done(function (data) {
                     resourceInventory = data.resources;
                     console.log("Inventory resources loaded !");
+
+                    self.displayResources()
+
                 })
                 .fail(function () {
                     $('body').html(data.msg);
@@ -37,12 +42,17 @@ let Inventory;
             ;
         };
 
-        this.getSize = function() {
+        this.displayResources = function () {
+            console.log(resourceInventory);
+            $('.resourcesInventory').html(resourceInventory);
+        };
+
+        this.test = function() {
 
         };
 
         this.loadResources();
-
+        this.loadResourcesInventory();
 
     }
 

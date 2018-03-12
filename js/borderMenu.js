@@ -89,7 +89,8 @@
                 }
 
                 //RessourcesInventory
-                new Inventory();
+                let inventory = new Inventory();
+
 
 
                 overlay.appendChild(characterInventory);

@@ -12,6 +12,10 @@ let Grid;
         this.destination = $(destination);
         this.slotValue = 0; //Cout d'achat d'une case
 
+        this.tab = [];
+
+
+
         this.slots = [];
         let self = this;
 
@@ -37,14 +41,21 @@ let Grid;
 
         for (let i = 0; i < this.largeur; ++i){
             let tr = $('<tr />');
+            this.tab[i] = [];
+
             for (let j = 0; j < this.hauteur; ++j){
 
                 let slot = (((j+i)%2) === 0 ? creer_case_blanche(i,j, getRandomInt(100)) : creer_case_noire(i,j, getRandomInt(100)));
+                this.tab[i].push(slot);
 
                 tr.append(slot);
             }
             this.destination.append(tr);
         }
+
+        console.log(this.tab);
+
+        this.tab[2][1].html("bob");
     }
 
 }) ();

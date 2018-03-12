@@ -54,14 +54,6 @@
         $('#mail').css(cssClear);
     }
 
-
-
-    $(document).ready(function() {
-
-        setTimeout(function(){
-            $('body').addClass('loaded');
-        }, 100); //6600
-
         /* $('.case-blanche').css(css_blanc).hover(function () {
             $(this).css(css_enhanced);
         }, function () {
@@ -74,11 +66,15 @@
             $(this).css(css_noir);
         }); */
 
-    });
 
 
 
     $(() => {
+        setTimeout(function(){
+            $('body').addClass('loaded');
+        }, 100); //6600
+
+
         $.ajax({
             url: '../json/isLogged.php'
         }).done(function (data) {
@@ -95,43 +91,41 @@
             $("body").html(erreurCritique);
         });
 
-        $(() => {
-            $('#accountCreationForm').submit(function () {
-                resetAppearance();
-                $.ajax({
-                    url: $(this).attr('action'),
-                    method: $(this).attr('method'),
-                    data: $(this).serialize()
-                })
-                    .done(function (data) {
-                        if(data.result) {
-                            $('#containerLogIn').slideUp();
-                        } else {
-                            switch (data.message){
-                                case 'Username already used' :
-                                    $('#username').css(cssError);
-                                    $('#errorLogin').html('This username is already used').show();
-                                    break;
-                                case 'Mail address already used':
-                                    $('#mail').css(cssError);
-                                    $('#errorLogin').html('This mail address is already used').show();
-                                    break;
-                                case 'Password don\'t match':
-                                    $('#password').css(cssError);
-                                    $('#passwordCheck').css(cssError);
-                                    $('#errorLogin').html('Passwords must match').show();
-                                    break;
-                                default:
-                                    $('#errorLogin').html('An unknown error has occured, please try again').show();
-                                    break;
-                            }
+        $('#accountCreationForm').submit(function () {
+            resetAppearance();
+            $.ajax({
+                url: $(this).attr('action'),
+                method: $(this).attr('method'),
+                data: $(this).serialize()
+            })
+                .done(function (data) {
+                    if(data.result) {
+                        $('#containerLogIn').slideUp();
+                    } else {
+                        switch (data.message){
+                            case 'Username already used' :
+                                $('#username').css(cssError);
+                                $('#errorLogin').html('This username is already used').show();
+                                break;
+                            case 'Mail address already used':
+                                $('#mail').css(cssError);
+                                $('#errorLogin').html('This mail address is already used').show();
+                                break;
+                            case 'Password don\'t match':
+                                $('#password').css(cssError);
+                                $('#passwordCheck').css(cssError);
+                                $('#errorLogin').html('Passwords must match').show();
+                                break;
+                            default:
+                                $('#errorLogin').html('An unknown error has occured, please try again').show();
+                                break;
                         }
-                    })
-                    .fail(function () {
-                        $("body").html(criticalError);
-                    });
-                return false;
-            });
+                    }
+                })
+                .fail(function () {
+                    $("body").html(criticalError);
+                });
+            return false;
         });
 
         $('#login-form').submit(function () {
