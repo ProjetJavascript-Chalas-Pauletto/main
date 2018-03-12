@@ -1,26 +1,65 @@
 /*! HTML5 Boilerplate v6.0.1 | MIT License | https://html5boilerplate.com/ */
 
 /* ==========================================================================
+INVENTORY
+========================================================================== */
+
+.characterInventory{
+    grid-row-start: 1;
+    grid-row-end: 3;
+    background: #2980b9;
+}
+
+.characterInventory  div {
+    width: 10%;
+    height: 10%;
+    background: #555555;
+    border: 1px solid yellow;
+}
+
+.resourcesInventory{
+    background: yellow;
+}
+.itemsInventory {
+    overflow: auto;
+}
+
+.slot {
+    background-color: grey;
+    border: solid 1px white;
+    color: white;
+    height: 100px;
+    width: 100px;
+    padding: 10px;
+    text-align: center;
+}
+
+/* ==========================================================================
+JOBS
+========================================================================== */
+
+.jobSkill {
+    display: inline-grid;
+    border: 1px solid rgba(0, 0, 0, 0.8);
+    background: #888888;
+}
+
+.jobSkill:hover {
+    background: #555555;
+}
+
+.jobSkill img{
+    max-width:90%;
+    max-height:90%;
+}
+
+
+/* ==========================================================================
 Map
 ========================================================================== */
 
 
-.case-blanche {
-background-color: grey;
-border: solid 1px white;
-color: white;
-height: 20px;
-width: 20px;
-text-align: center;
-}
-.case-noire {
-background-color: grey;
-border: solid 1px black;
-color: black;
-height: 20px;
-width: 20px;
-text-align: center;
-}
+
 
 /* ==========================================================================
 Incredible Loading page
@@ -277,15 +316,66 @@ animation: fadeIn 1s ease-out ,spin 2s ease-in-out infinite ; /* Chrome, Firefox
    Base styles: opinionated defaults
    ========================================================================== */
 
-html {
+html,body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+html{
     color: #222;
     font-size: 1em;
     line-height: 1.4;
 }
 
-.container{
+.game{
     user-select: none;
+    height:100%;
+
+    display: grid;
+    grid-template-columns: 25% 50% 25%;
+    grid-template-rows: auto 20%;
 }
+
+.gameLeft{
+    background: #2980b9;
+    display: grid;
+    grid-template-columns: 100%;
+    grid-template-rows: 50% 50%;
+}
+
+#logTitle{
+    text-align: center;
+}
+
+#log {
+    border-top: 2px dashed sandybrown;
+    border-bottom: 1px dashed sandybrown;
+    box-shadow: inset 0 -1px 0 0 sandybrown, inset 0 1px 0 0 sandybrown, 0 1px 0 0 sandybrown, 0 -1px 0 0 sandybrown;
+    margin: 5%;
+    vertical-align: bottom;
+}
+
+.logMessage{
+    font-weight: lighter ;
+}
+
+.gameMiddle{
+    background: #333333;
+}
+
+.gameRight{
+    background: yellow;
+}
+
+.gameBottom{
+    background: crimson;
+    grid-column-start: 1;
+    grid-column-end: 4;
+}
+
+
+
 
 
 
@@ -462,9 +552,9 @@ textarea {
 }
 
 @media print,
-       (-webkit-min-device-pixel-ratio: 1.25),
-       (min-resolution: 1.25dppx),
-       (min-resolution: 120dpi) {
+(-webkit-min-device-pixel-ratio: 1.25),
+(min-resolution: 1.25dppx),
+(min-resolution: 120dpi) {
     /* Style adjustments for high resolution devices */
 }
 

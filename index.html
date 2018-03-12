@@ -1,123 +1,129 @@
 <!doctype html>
 <html class="no-js" lang="">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title id="title">Looking for good stuffs</title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <link rel="manifest" href="site.webmanifest">
-        <link rel="apple-touch-icon" href="icon.png">
-        <!-- Place favicon.ico in the root directory -->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-        <link rel="stylesheet" href="css/normalize.css">
-        <link rel="stylesheet" href="css/main.css">
-        <link rel="stylesheet" href="css/style3.css" />
+    <link rel="manifest" href="site.webmanifest">
+    <link rel="apple-touch-icon" href="icon.png">
+    <!-- Place favicon.ico in the root directory -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <!-- <link rel="stylesheet" href="css/normalize.css"> -->
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/style3.css" />
 
-        <script src="js/modernizr.custom.js"></script>
-    </head>
-    <body>
+    <script src="js/modernizr.custom.js"></script>
+</head>
+<body>
 
-        <!-- LOADING ANIMATION -->
-        <div id="loader-wrapper">
-            <div id="loader">
-                <img src="img/Ozenix%20LogoSplit_1.png">
-                <div id="loader2">
-                    <img src="img/Ozenix%20LogoSplit_2.png">
-                    <div id="loader3">
-                        <img src="img/Ozenix%20LogoSplit_3.png">
-                        <div id="loader4">
-                            <img src="img/Ozenix%20LogoSplit_4.png">
-                            <div id="loader5">
-                                <img src="img/Ozenix%20LogoSplit_5.png">
-                            </div>
-                        </div>
+<!-- LOADING ANIMATION -->
+<div id="loader-wrapper">
+    <div id="loader">
+        <img src="img/Ozenix%20LogoSplit_1.png">
+        <div id="loader2">
+            <img src="img/Ozenix%20LogoSplit_2.png">
+            <div id="loader3">
+                <img src="img/Ozenix%20LogoSplit_3.png">
+                <div id="loader4">
+                    <img src="img/Ozenix%20LogoSplit_4.png">
+                    <div id="loader5">
+                        <img src="img/Ozenix%20LogoSplit_5.png">
                     </div>
                 </div>
             </div>
-
-            <div class="loader-section section-left"></div>
-            <div class="loader-section section-right"></div>
         </div>
+    </div>
 
-        <div class="container">
-            <!-- GameContent -->
-            <h1>SALUT GROS BEAU GOSSE</h1>
+    <div class="loader-section section-left"></div>
+    <div class="loader-section section-right"></div>
+</div>
 
+<div id="notConnected" align="center" style="display: none">
+    <h1>Log In</h1>
+    <form id="login-form" action="/json/login.php" method="post">
+        <input type="text" name="username" />
+        <input type="password" name="password" />
+        <input class="btn btn-light" type="submit" value="Connexion"/>
+        <p id="logMsg"></p>
+    </form>
 
-            <div id="notConnected" align="center" style="display: none">
-                <h1>Log In ma boi</h1>
-                <form id="login-form" action="/json/login.php" method="post">
-                    <input type="text" name="username" />
-                    <input type="password" name="password" />
-                    <input class="btn btn-light" type="submit" value="Connexion"/>
-                    <p id="logMsg"></p>
-                </form>
+    <h1>Account creation</h1>
+    <div id="errorLogin" class="alert alert-danger" style="display:none"></div>
+    <form action="/json/accountCreation.php" method="post" id="accountCreationForm">
+        <label for="username">Username</label>
+        <input type="text" id="username" name="username"/><br/>
+        <label for="mail">Mail</label>
+        <input type="email" id="mail" name="mail"/><br/>
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password"/><br/>
+        <label for="passwordCheck">Password verification</label>
+        <input type="password" id="passwordCheck" name="passwordCheck"/><br/>
+        <input type="submit" value="Create account"/>
+    </form>
+</div>
 
-                <h1>Account creation</h1>
-                <div id="errorLogin" class="alert alert-danger" style="display:none"></div>
-                <form action="/json/accountCreation.php" method="post" id="accountCreationForm">
-                    <label for="username">Username</label>
-                    <input type="text" id="username" name="username"/><br/>
-                    <label for="mail">Mail</label>
-                    <input type="email" id="mail" name="mail"/><br/>
-                    <label for="password">Password</label>
-                    <input type="password" id="password" name="password"/><br/>
-                    <label for="passwordCheck">Password verification</label>
-                    <input type="password" id="passwordCheck" name="passwordCheck"/><br/>
-                    <input type="submit" value="Create account"/>
-                </form>
-
-
-            </div>
-
-            <nav id="bt-menu" class="bt-menu" style="display: none">
-                <a href="#" class="bt-menu-trigger"><span>Menu</span></a>
-                <ul>
-                    <li><a href="#" class="bt-icon icon-user-outline">Character</a></li>
-                    <li><a href="#" id="bt-jobs" class="bt-icon icon-windows">Jobs</a></li>
-                    <li><a href="#" id="bt-skills" class="bt-icon icon-sun">Skills</a></li>
-                    <li><a href="#" id="bt-inventory" class="bt-icon icon-star">Inventory</a></li>
-                    <li><a href="#" id="bt-map" class="bt-icon icon-speaker">Map</a></li>
-                    <li><a href="#" class="bt-icon icon-bubble">Logout</a></li>
-                </ul>
-                <form id="logout-form" action="/json/logout.php" style="display: none">
-                    <input class="form-control" type="submit" value="Deconnexion"/>
-                </form>
-
-                <!--
-                <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                    <strong>Welcome Back !</strong> Message...
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                -->
-            </nav>
-
-
-
-            <div id="job" style="display: none">
-                <button id="click">Click</button>
-
-            </div>
-
+<div class="game">
+    <!-- GameContent -->
+    <div class="gameLeft">
+        <div> Contenu non défini (Work in Progress !) </div>
+        <div id="log">
+            <h4 id="logTitle"> Activity feed </h4>
         </div>
+    </div>
+    <div class="gameMiddle">
+        <div id="job" style="display: none">
+            <button id="click">Click</button>
+            <img src="">
+        </div>
+    </div>
+
+    <div class="gameRight"></div>
+
+    <div class="gameBottom"></div>
+
+</div>
 
 
-        <script src="js/vendor/modernizr-3.5.0.min.js"></script>
-        <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-        <script>window.jQuery || document.write('<script src="js/vendor/jquery-3.2.1.min.js"><\/script>')</script>
-        <script src="js/plugins.js"></script>
-        <script src="js/mapM.js"></script>
-        <script src="js/main.js"></script>
-        <script src="js/borderMenu.js"></script>
-        <script src="js/classie.js"></script>
-        <script src="js/jobs.js"></script>
-    </body>
+<nav id="bt-menu" class="bt-menu" style="display: none">
+    <a href="#" class="bt-menu-trigger"><span>Menu</span></a>
+    <ul>
+        <li><a href="#" class="bt-icon icon-user-outline">Character</a></li>
+        <li><a href="#" id="bt-jobs" class="bt-icon icon-windows">Jobs</a></li>
+        <li><a href="#" id="bt-skills" class="bt-icon icon-sun">Skills</a></li>
+        <li><a href="#" id="bt-inventory" class="bt-icon icon-star">Inventory</a></li>
+        <li><a href="#" id="bt-map" class="bt-icon icon-speaker">Map</a></li>
+        <li><a href="#" class="bt-icon icon-bubble">Logout</a></li>
+    </ul>
+    <form id="logout-form" action="/json/logout.php" style="display: none">
+        <input class="form-control" type="submit" value="Deconnexion"/>
+    </form>
+
+    <!--
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        <strong>Welcome Back !</strong> Message...
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    -->
+</nav>
+
+
+<script src="js/vendor/modernizr-3.5.0.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script>window.jQuery || document.write('<script src="js/vendor/jquery-3.2.1.min.js"><\/script>')</script>
+<script src="js/plugins.js"></script>
+<script src="js/grid.js"></script>
+<script src="js/main.js"></script>
+<script src="js/borderMenu.js"></script>
+<script src="js/classie.js"></script>
+<script src="js/jobs.js"></script>
+</body>
 </html>
 
 

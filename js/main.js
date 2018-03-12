@@ -58,6 +58,13 @@
         // TODO
     }
 
+    function displayOnLog(string) {
+        $('#log').append($('<div />').addClass('logMessage').html(string));
+    }
+    displayOnLog("You arrived in town !");
+    displayOnLog("You left the town !");
+    displayOnLog("You're now heading to the forest (-2,0) !");
+
 
 
     $(document).ready(function() {
