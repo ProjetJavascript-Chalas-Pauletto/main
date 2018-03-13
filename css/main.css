@@ -59,8 +59,8 @@ Map
 ========================================================================== */
 
 #posPlayer {
-    border : 2px solid red;
-}
+     border : 2px solid red;
+ }
 
 
 /* ==========================================================================
@@ -359,8 +359,9 @@ html{
 }
 
 .logMessage{
-    font-weight: lighter ;
+    position: relative;
 }
+
 
 .gameMiddle{
     background: #333333;
