@@ -3,7 +3,6 @@ let mapM;
     "use strict";
 
     mapM = class mapM {
-
         constructor(height,width,dest,data){
             this.height = height;
             this.width = width;
@@ -38,8 +37,7 @@ let mapM;
                 .fail(function () {
                     $('body').html(data.msg);
                 })
-            ;
-        };
+        }
 
         initPosition () {
             let self = this;
@@ -54,7 +52,7 @@ let mapM;
                 .fail(function () {
                     return -1; // Shouldn't happen but if it happens we will be able to notice it.
                 })
-        };
+        }
 
 
         startTimer(time) {
@@ -127,62 +125,42 @@ let mapM;
                 }).fail(function () {
                 $('body').html(data.msg);
             });
-        };
+        }
 
-        create_forest_case (x,y) {
+        create_case (x,y,type) {
             return $('<div />')
-                .addClass('forest_case')
+                .addClass(type)
                 .data('x', x)
                 .data('y', y)
-                .click(self.click_case);
-        };
-
-        create_village_case (x,y) {
-            return $('<div />')
-                .addClass('village_case')
-                .data('x', x)
-                .data('y', y)
-                .click(self.click_case);
-
-        };
-
-        create_lake_case (x,y) {
-            return $('<div />')
-                .addClass('lake_case')
-                .data('x', x)
-                .data('y', y)
-                .click(self.click_case);
-        };
+                .click(this.click_case);
+        }
 
         createMap() {
-
-            let fnAjouteCase = (self, fn, x, y, col) => {
-                let slot = fn(x,y);
-                col.append(slot);
-                self.tab[x].push(slot);
-            };
-
-            let landTypes = {
-                'FOREST': this.create_forest_case,
-                'LAKE': this.create_lake_case,
-                'VILLAGE': this.create_village_case
-            };
-
             for (let x = 0;x<this.data.length;++x){
                 let tmpColumn = $('<div />');
                 this.tab[x] = [];
                 for (let y = 0;y<this.data.length;++y) {
-                    let land = landTypes [ this.data[x][y] ];
-                    if (typeof(land) !== 'undefined') {
-                        fnAjouteCase(this, land, x,y, tmpColumn);
-                    } else {
-                        $('body').html("Something strange happened");
+                    let type = "";
+                    switch(this.data[x][y]) {
+                        case "FOREST":
+                            type = "forest_case";
+                            break;
+                        case "LAKE":
+                            type = "lake_case";
+                            break;
+                        case "VILLAGE":
+                            type = "village_case";
+                            break;
+                        default:
+                            $('body').html("Something strange happened");
                     }
+                    let slot = this.create_case(x,y,type);
+                    this.tab[x].push(slot);
+                    tmpColumn.append(slot);
                 }
                 this.map.append(tmpColumn);
             }
             this.initPosition();
         }
-
     };
 }) ();
