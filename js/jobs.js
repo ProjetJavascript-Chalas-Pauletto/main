@@ -1,3 +1,16 @@
+    let Job;
+    (function () {
+        "use strict";
+
+        Job = class Job {
+            constructor() {
+
+            }
+        }
+
+
+    })();
+
 //Variable
 var wood = 0
 

@@ -70,16 +70,23 @@
     $(() => {
         setTimeout(function(){
             $('body').addClass('loaded');
-        }, 100); //6600
+        }, 6600); //6600
+
+        let init = function(){
+            console.log("Initialising menu...");
+            let menu = new Menu();
+        };
 
 
         $.ajax({
             url: '../json/isLogged.php'
         }).done(function (data) {
             if (data.result) { // User connected
+                init();
                 $('#logout-form').show();
                 $('#bt-menu').show();
                 $('#job').show();
+
 
             } else { // User not connected
                 $('#notConnected').show();
