@@ -8,6 +8,8 @@ let Menu;
             this.menu = document.getElementById('bt-menu');//$('#bt-menu');
             this.overlay = this.createOverlay();
 
+            this.inventory = new Inventory();
+
             this.createMenu();
             this.createEvent();
         }
@@ -58,7 +60,9 @@ let Menu;
         }
 
         createMenu(){
-            //Job panel
+            /*##############################
+            Create Job PANEL
+            #############################"*/
             for (let i = 0; i < 8; i++) {
                 let job = document.createElement(("div"));
                 job.setAttribute("class", 'jobSkill');
@@ -96,21 +100,9 @@ let Menu;
                 characterInventory.appendChild(characterSlot);
             }
 
-            //RessourcesInventory
-            let inventory = new Inventory();
-
-
             self.overlay.appendChild(characterInventory);
             self.overlay.appendChild(resourcesInventory);
             self.overlay.appendChild(itemsInventory);
-
-            let test = $('<p />').attr('id', 'omfg').html('CLIQUE ICI');
-
-            $('.resourcesInventory').append(test);
-
-            $('#omfg').click(function () {
-                //
-            });
 
             //itemInventory
             new Grid(10, 10, '.itemsInventory');
