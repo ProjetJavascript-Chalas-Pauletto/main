@@ -15,30 +15,6 @@ let mapM;
 
         }
 
-        isMoving () {
-            let self = this;
-            $.ajax({
-                url: '/json/isMoving.php',
-                type: 'POST',
-                data: {TIME : Date.now()}
-            })
-                .done(function (data) {
-                    if(data.result){ // If the player is still traveling
-                        clearTimeout(self.timeCheck);
-                        self.timeCheck = setTimeout(self.isMoving,data.timeLeft);
-                        console.log("Still moving");
-                        console.log("Set isMoving Timeout to : " + data.timeLeft + "ms");
-                    } else { //When traveling will be done
-                        console.log("Travel finished !");
-                        self.tab[data.pos['POS_X_INIT']][data.pos['POS_Y_INIT']].removeAttr("id");
-                        self.tab[data.pos['POS_X_DEST']][data.pos['POS_Y_DEST']].attr("id","posPlayer");
-                    }
-                })
-                .fail(function () {
-                    $('body').html(data.msg);
-                })
-        }
-
         initPosition () {
             let self = this;
             $.ajax({
@@ -91,48 +67,73 @@ let mapM;
             $("#timer").html("Vous voila arrivé mon bon !").css("width", "100%");
         }
 
-        click_case () {
-            let self = this;
-            let x = $(this).data('x');
-            let y = $(this).data('y');
-            $.ajax({
-                url:'/json/isMoving.php',
-                type: 'POST',
-                data: {TIME : Date.now()}
-            })
-                .done(function (data) {
-                    if(!data.result) { // If the player isn't moving
-                        $.ajax({
-                            url:'/json/startMoving.php',
-                            type: 'POST',
-                            data: {POS_X_DEST: x, POS_Y_DEST: y, TIME_START: Date.now()}
-                        })
-                            .done(function (data) {
-                                if (data.result){ // If the player starts moving
-                                    console.log("Travel Started !");
-                                    console.log("Set isMoving Timeout to : " + data.timeLength + "ms");
-                                    self.timeCheck = setTimeout(self.isMoving, data.timeLength);
-                                } else { // Erreur de déplacement ?
-                                    $('body').html(data.msg);
-                                }
-                            })
-                            .fail(function () {
-                                $('body').html(data.msg);
-                            });
-                    } else { // When the player is moving, we just wait and do nothing else.
-                        console.log("You are already moving !")
-                    }
-                }).fail(function () {
-                $('body').html(data.msg);
-            });
-        }
-
         create_case (x,y,type) {
+            let self = this;
+
+            let click_case = function () {
+                let x = $(this).data('x');
+                let y = $(this).data('y');
+
+                $.ajax({
+                    url:'/json/isMoving.php',
+                    type: 'POST',
+                    data: {TIME : Date.now()}
+                })
+                    .done(function (data) {
+                        if(!data.result) { // If the player isn't moving
+                            $.ajax({
+                                url:'/json/startMoving.php',
+                                type: 'POST',
+                                data: {POS_X_DEST: x, POS_Y_DEST: y, TIME_START: Date.now()}
+                            })
+                                .done(function (data) {
+                                    if (data.result){ // If the player starts moving
+                                        console.log("Travel Started !");
+                                        console.log("Set isMoving Timeout to : " + data.timeLength + "ms");
+                                        //let test = self.isMoving()
+                                        self.timeCheck = setTimeout( function() {
+                                            $.ajax({
+                                                url: '/json/isMoving.php',
+                                                type: 'POST',
+                                                data: {TIME : Date.now()}
+                                            })
+                                                .done(function (data) {
+                                                    if(data.result){ // If the player is still traveling
+                                                        clearTimeout(self.timeCheck);
+                                                        self.timeCheck = setTimeout(self.isMoving,data.timeLeft);
+                                                        console.log("Still moving");
+                                                        console.log("Set isMoving Timeout to : " + data.timeLeft + "ms");
+                                                    } else { //When traveling will be done
+                                                        console.log("Travel finished !");
+                                                        console.log(self.tab);
+                                                        self.tab[data.pos['POS_X_INIT']][data.pos['POS_Y_INIT']].removeAttr("id");
+                                                        self.tab[data.pos['POS_X_DEST']][data.pos['POS_Y_DEST']].attr("id","posPlayer");
+                                                    }
+                                                })
+                                                .fail(function () {
+                                                    $('body').html(data.msg);
+                                                })
+                                        }, data.timeLength);
+                                    } else { // Erreur de déplacement ?
+                                        $('body').html(data.msg);
+                                    }
+                                })
+                                .fail(function () {
+                                    $('body').html(data.msg);
+                                });
+                        } else { // When the player is moving, we just wait and do nothing else.
+                            console.log("You are already moving !")
+                        }
+                    }).fail(function () {
+                    $('body').html(data.msg);
+                });
+            };
+
             return $('<div />')
                 .addClass(type)
                 .data('x', x)
                 .data('y', y)
-                .click(this.click_case);
+                .click(click_case);
         }
 
         createMap() {
