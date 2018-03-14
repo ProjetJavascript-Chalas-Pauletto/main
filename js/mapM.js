@@ -70,6 +70,30 @@ let mapM;
         create_case (x,y,type) {
             let self = this;
 
+            let isMoving = function() {
+                    $.ajax({
+                        url: '/json/isMoving.php',
+                        type: 'POST',
+                        data: {TIME : Date.now()}
+                    })
+                        .done(function (data) {
+                            if(data.result){ // If the player is still traveling
+                                clearTimeout(self.timeCheck);
+                                self.timeCheck = setTimeout(self.isMoving,data.timeLeft);
+                                console.log("Still moving");
+                                console.log("Set isMoving Timeout to : " + data.timeLeft + "ms");
+                            } else { //When traveling will be done
+                                console.log("Travel finished !");
+                                console.log(self.tab);
+                                self.tab[data.pos['POS_X_INIT']][data.pos['POS_Y_INIT']].removeAttr("id");
+                                self.tab[data.pos['POS_X_DEST']][data.pos['POS_Y_DEST']].attr("id","posPlayer");
+                            }
+                        })
+                        .fail(function () {
+                            $('body').html(data.msg);
+                        })
+            };
+
             let click_case = function () {
                 let x = $(this).data('x');
                 let y = $(this).data('y');
@@ -91,29 +115,7 @@ let mapM;
                                         console.log("Travel Started !");
                                         console.log("Set isMoving Timeout to : " + data.timeLength + "ms");
                                         //let test = self.isMoving()
-                                        self.timeCheck = setTimeout( function() {
-                                            $.ajax({
-                                                url: '/json/isMoving.php',
-                                                type: 'POST',
-                                                data: {TIME : Date.now()}
-                                            })
-                                                .done(function (data) {
-                                                    if(data.result){ // If the player is still traveling
-                                                        clearTimeout(self.timeCheck);
-                                                        self.timeCheck = setTimeout(self.isMoving,data.timeLeft);
-                                                        console.log("Still moving");
-                                                        console.log("Set isMoving Timeout to : " + data.timeLeft + "ms");
-                                                    } else { //When traveling will be done
-                                                        console.log("Travel finished !");
-                                                        console.log(self.tab);
-                                                        self.tab[data.pos['POS_X_INIT']][data.pos['POS_Y_INIT']].removeAttr("id");
-                                                        self.tab[data.pos['POS_X_DEST']][data.pos['POS_Y_DEST']].attr("id","posPlayer");
-                                                    }
-                                                })
-                                                .fail(function () {
-                                                    $('body').html(data.msg);
-                                                })
-                                        }, data.timeLength);
+                                        self.timeCheck = setTimeout(isMoving, data.timeLength);
                                     } else { // Erreur de déplacement ?
                                         $('body').html(data.msg);
                                     }
