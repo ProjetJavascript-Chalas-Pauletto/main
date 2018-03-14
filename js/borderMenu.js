@@ -87,7 +87,7 @@
                 map.setAttribute("align", "center");
 
                 let progress = document.createElement("div");
-                progress.setAttribute("class", "progress")
+                progress.setAttribute("class", "progress");
                 let bar = document.createElement("div");
                 bar.setAttribute("id", "timer");
                 bar.setAttribute("class", "progress-bar progress-bar-striped active");

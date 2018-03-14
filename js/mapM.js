@@ -22,7 +22,7 @@ let mapM;
             })
                 .done(function (data) {
                     if(data.result){ // If everything went right we look for the player's position
-                        self.tab[data.pos['POS_X']][data.pos['POS_Y']].attr("id","posPlayer");
+                        self.tab[data.pos['POS_X']][data.pos['POS_Y']].append($('<div />').attr("id","posPlayer"));
                     }
                 })
                 .fail(function () {
@@ -87,8 +87,8 @@ let mapM;
                                 console.log("Still moving");
                                 console.log("Set isMoving Timeout to : " + data.timeLeft + "ms");
                             } else { //When traveling will be done
-                                self.tab[data.pos['POS_X_INIT']][data.pos['POS_Y_INIT']].removeAttr("id");
-                                self.tab[data.pos['POS_X_DEST']][data.pos['POS_Y_DEST']].attr("id","posPlayer");
+                                self.tab[data.pos['POS_X_INIT']][data.pos['POS_Y_INIT']].empty();
+                                self.tab[data.pos['POS_X_DEST']][data.pos['POS_Y_DEST']].append($('<div />').attr("id","posPlayer"));
                             }
                         })
                         .fail(function () {
