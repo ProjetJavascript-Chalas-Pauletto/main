@@ -38,14 +38,9 @@ let mapM;
             this.setTimer();
         }
 
-        checkTime(i) {// add a zero in front of numbers<10
-            if (i < 10) {
-                i = "0" + i;
-            }
-            return i;
-        }
 
         setTimer() {
+            let self = this;
             let timeLeft = this.endTime - Date.now();
             if (timeLeft >= 0){
                 let percentage = 100 - Math.floor(timeLeft * 100 / this.timeTravel);
@@ -56,14 +51,22 @@ let mapM;
                 seconds = this.checkTime(seconds);
                 $("#title").html(hours + ":" + minutes + ":" + seconds + " - Travelling");
                 $("#timer").html(hours + ":" + minutes + ":" + seconds).css("width", percentage + "%");
-                let timer = setTimeout(function(){ setTimer() }, 1000);
+                let timer = setTimeout(function(){ self.setTimer() }, 1000);
             } else{
                 this.stopTimer();
             }
         }
 
+        checkTime(i) {// add a zero in front of numbers<10
+            if (i < 10) {
+                i = "0" + i;
+            }
+            return i;
+        }
+
+
         stopTimer(){
-            $("#title").html("Tranquillement !");
+            $("#title").html("Tranquillement arrivé !");
             $("#timer").html("Vous voila arrivé mon bon !").css("width", "100%");
         }
 
@@ -79,12 +82,11 @@ let mapM;
                         .done(function (data) {
                             if(data.result){ // If the player is still traveling
                                 clearTimeout(self.timeCheck);
+                                self.startTimer(data.timeLeft);
                                 self.timeCheck = setTimeout(self.isMoving,data.timeLeft);
                                 console.log("Still moving");
                                 console.log("Set isMoving Timeout to : " + data.timeLeft + "ms");
                             } else { //When traveling will be done
-                                console.log("Travel finished !");
-                                console.log(self.tab);
                                 self.tab[data.pos['POS_X_INIT']][data.pos['POS_Y_INIT']].removeAttr("id");
                                 self.tab[data.pos['POS_X_DEST']][data.pos['POS_Y_DEST']].attr("id","posPlayer");
                             }
@@ -114,7 +116,7 @@ let mapM;
                                     if (data.result){ // If the player starts moving
                                         console.log("Travel Started !");
                                         console.log("Set isMoving Timeout to : " + data.timeLength + "ms");
-                                        //let test = self.isMoving()
+                                        self.startTimer(data.timeLength);
                                         self.timeCheck = setTimeout(isMoving, data.timeLength);
                                     } else { // Erreur de déplacement ?
                                         $('body').html(data.msg);
