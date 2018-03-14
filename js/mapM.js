@@ -31,7 +31,7 @@ let mapM;
         }
 
 
-        startTimer(time) {
+        startTimer(time) { // used to start the timer on the top of the map
             this.endTime = Date.now() + time;
             this.timeTravel = time;
             //timer = setInterval(setTimer(), 500);
@@ -39,7 +39,7 @@ let mapM;
         }
 
 
-        setTimer() {
+        setTimer() { // Setting all stuffs properly in order to have a clean displaying
             let self = this;
             let timeLeft = this.endTime - Date.now();
             if (timeLeft >= 0){
@@ -65,15 +65,15 @@ let mapM;
         }
 
 
-        stopTimer(){
+        stopTimer(){ // Stops updating the title with the time left for moving
             $("#title").html("Tranquillement arrivé !");
-            $("#timer").html("Vous voila arrivé mon bon !").css("width", "100%");
+            $("#timer").html("Vous voilà arrivé à destination mon bon !").css("width", "100%");
         }
 
-        create_case (x,y,type) {
+        create_case (x,y,type) { //Create all case and set their .click we struggled with some context troubles but everything is right atm.
             let self = this;
 
-            let isMoving = function() {
+            let isMoving = function() { // Check if the player is still moving or update his position. (Security of the database)
                     $.ajax({
                         url: '/json/isMoving.php',
                         type: 'POST',
@@ -96,11 +96,11 @@ let mapM;
                         })
             };
 
-            let click_case = function () {
+            let click_case = function()  {
                 let x = $(this).data('x');
                 let y = $(this).data('y');
 
-                $.ajax({
+                $.ajax({ // Is the player moving ?
                     url:'/json/isMoving.php',
                     type: 'POST',
                     data: {TIME : Date.now()}
@@ -140,7 +140,7 @@ let mapM;
                 .click(click_case);
         }
 
-        createMap() {
+        createMap() { // Creating the map using the database's datas
             for (let x = 0;x<this.data.length;++x){
                 let tmpColumn = $('<div />');
                 this.tab[x] = [];
