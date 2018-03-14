@@ -1,14 +1,12 @@
-let Menu;
-(function () {
-    "use strict";
-
-    Menu = class Menu {
-        constructor() {
+class Menu {
+        constructor(inventory, jobs) {
+            console.log("Menu Loading");
             this.eventType = this.mobileCheck() ? 'touchstart' : 'click';
-            this.menu = document.getElementById('bt-menu');//$('#bt-menu');
+            this.menu = $('#bt-menu');//$('#bt-menu');
             this.overlay = this.createOverlay();
 
-            this.inventory = new Inventory();
+            this.inventory = inventory;
+            this.jobs = jobs;
 
             this.createMenu();
             this.createEvent();
@@ -24,8 +22,8 @@ let Menu;
         }
 
         resetMenu() {
-            classie.remove(this.menu, 'bt-menu-open');
-            classie.add(this.menu, 'bt-menu-close');
+            this.menu.removeClass('bt-menu-open');
+            this.menu.addClass('bt-menu-close');
         }
 
         closeClickFn(ev) {
@@ -34,22 +32,22 @@ let Menu;
         };
 
         createOverlay() {
-            let overlay = document.createElement('div');
-            overlay.className = 'bt-overlay';
-            this.menu.appendChild(overlay);
+            let overlay = $('<div />').addClass('bt-overlay');
+            this.menu.append(overlay);
 
             return overlay;
         }
 
         //Open panel
         openPanel(title, id) {
-            let samePanel = this.overlay.classList.contains(id);
+            let samePanel = this.overlay.hasClass(title);
 
-            if (this.overlay.classList.length > 1) { //Si un panel est ouvert
+            if (this.overlay.hasClass('bt-overlay-panel')) { //Si un panel est ouvert
                 this.closeAll();
             }
             if (!samePanel) { //Si on ouvre pas le meme panel
-                this.overlay.classList.add(id);
+                $('.' + id).css("display", "");
+                this.overlay.addClass('bt-overlay-panel ' + title);
                 //let header = document.createElement("H1");
                 //let text = document.createTextNode(title);
                 //header.appendChild(text);
@@ -60,92 +58,97 @@ let Menu;
         }
 
         createMenu(){
+            let createPanel = function (title){
+                return $('<div />').addClass(title).css("display", "none");
+            };
+
             /*##############################
             Create Job PANEL
             #############################"*/
+            let jobsPanel = createPanel('jobs-panel');
             for (let i = 0; i < 8; i++) {
-                let job = document.createElement(("div"));
-                job.setAttribute("class", 'jobSkill');
-                let exp = document.createElement(("div"));
-                exp.setAttribute("class", 'progress');
-                let progress = document.createElement('div');
-                progress.setAttribute("class", "progress-bar progress-bar-striped progress-bar-animated");
-                progress.setAttribute("style", "width: " + i * (100 / 8) + "%");
-                let text = document.createTextNode(i * (100 / 8) + "%");
-                progress.appendChild(text);
-                exp.appendChild(progress);
-
+                let job = $('<div />').addClass("jobSkill");
+                let exp = $('<div />').addClass("progress");
+                let progress = $('<div />').addClass("progress-bar progress-bar-striped progress-bar-animated job" + i).css("width", i * (100 / 8) + "%").html(i * (100 / 8) + "%");
+                exp.append(progress);
                 //Add image skill
-                let icon = document.createElement('img');
-                icon.setAttribute("src", "img/jobs/lumberjack.png");
-                job.appendChild(exp);
-                job.appendChild(icon);
-                self.overlay.appendChild(job);
+                let icon = $('<img />').attr("src", "img/jobs/lumberjack.png");
+                job.append(exp);
+                job.append(icon);
+                jobsPanel.append(job);
             }
 
             /*##############################
             Create Inventory PANEL
             #############################"*/
-            let characterInventory = document.createElement("div");
-            let resourcesInventory = document.createElement("div");
-            let itemsInventory = document.createElement("div");
-            characterInventory.setAttribute("class", "characterInventory");
-            resourcesInventory.setAttribute("class", "resourcesInventory");
-            itemsInventory.setAttribute("class", "itemsInventory");
+            let inventoryPanel = createPanel('inventory-panel');
+
+            let characterInventory = $('<div />').addClass("characterInventory");
+            let resourcesInventory = $('<div />').addClass("resourcesInventory");
+            let itemsInventory = $('<div />').addClass("itemsInventory");
 
             //CharacterInventory
             for (let i = 0; i < 8; i++) {
-                let characterSlot = document.createElement("div");
-                characterSlot.setAttribute("class", "slot" + i);
-                characterInventory.appendChild(characterSlot);
+                let characterSlot = $('<div />').addClass("slot" + i);
+                characterInventory.append(characterSlot);
             }
 
-            self.overlay.appendChild(characterInventory);
-            self.overlay.appendChild(resourcesInventory);
-            self.overlay.appendChild(itemsInventory);
+            inventoryPanel.append(characterInventory);
+            inventoryPanel.append(resourcesInventory);
+            inventoryPanel.append(itemsInventory);
 
             //itemInventory
             new Grid(10, 10, '.itemsInventory');
 
-
             /*##############################
             Create MAP PANEL
             #############################"*/
-            let map = document.createElement("div");
-            map.setAttribute("id", "map");
-            self.overlay.appendChild(map);
+            let mapPanel = createPanel('map-panel');
+
+            let map = $('<div />').attr('id','map');
+            mapPanel.append(map);
             new Grid(30, 30, '#map');
 
             /*##############################
             Create SKILL PANEL
             #############################"*/
-            //todo
+            let skillsPanel = createPanel('skills-panel');
+
+            //Ajoute les panel dans l'Overlay
+            this.overlay.append(jobsPanel);
+            this.overlay.append(inventoryPanel);
+            this.overlay.append(mapPanel);
+            this.overlay.append(skillsPanel);
         }
 
         createEvent() {
             let self = this;
             //Open Menu
             $(".bt-menu-trigger").on(this.eventType, function () {
-                if (classie.has(self.menu, 'bt-menu-open')) {
+                if (self.menu.hasClass('bt-menu-open')) {
                     self.resetMenu();
                     self.closeAll();
                 }
                 else {
-                    classie.remove(self.menu, 'bt-menu-close');
-                    classie.add(self.menu, 'bt-menu-open');
-                    //overlay.addEventListener( eventtype, closeClickFn );
+                    self.menu.removeClass('bt-menu-close');
+                    self.menu.addClass('bt-menu-open');
+                    //overlay.addEventListener(eventtype, closeClickFn );
                 }
             });
 
             //Open Jobs Panel
             $("#bt-jobs").on(this.eventType, function () {
                 if (self.openPanel("Jobs", "jobs-panel")) {
+                    for (let job in self.jobs){
+                        self.jobs[job].displayJob();
+                    }
                 }
             });
 
             //Open Inventory Panel
             $("#bt-inventory").on(this.eventType, function () {
                 if (self.openPanel("Inventory", "inventory-panel")) {
+                    self.inventory.displayResources();
                 }
             });
 
@@ -163,12 +166,9 @@ let Menu;
         }
 
         closeAll() {
-            if (this.overlay.classList.length > 1) {
-                this.overlay.className = 'bt-overlay';
+            if (this.overlay.hasClass("bt-overlay-panel")) {
+                this.overlay.attr("class", "bt-overlay");
             }
-            while (this.overlay.hasChildNodes()) {
-                this.overlay.removeChild(this.overlay.firstChild);
-            }
+            $('.bt-overlay').children().css("display", "none"); //Cache tous les panels
         };
     }
-})();

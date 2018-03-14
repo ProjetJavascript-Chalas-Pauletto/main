@@ -12,8 +12,8 @@ $result->resources = array();
 $resources = loadResourceInventory($_SESSION["id"]);
 
 while ($row = $resources->fetch()) {
-    //$result->resources[$row['ID_RESSOURCE']] = (int)$row['QUANTITY'];
-    array_push($result->resources, array($row['ID_RESSOURCE'], $row['QUANTITY']));
+    $result->resources[$row['ID_RESSOURCE']] = (int)$row['QUANTITY'];
+    //array_push($result->resources, array($row['ID_RESSOURCE'], (int)$row['QUANTITY']));
 }
 
 

@@ -1,10 +1,4 @@
-let Inventory;
-
-//https://stackoverflow.com/questions/31685262/not-recommended-to-use-use-strict-in-es6
-(function () {
-    "use strict";
-
-Inventory = class Inventory{
+class Inventory{
     constructor() {
         this.resources = [];
         this.resourceInventory = [];
@@ -37,7 +31,7 @@ Inventory = class Inventory{
                 self.resourceInventory = data.resources;
                 console.log("Inventory resources loaded ! ");
                 console.log(self.resourceInventory);
-                self.displayResources();
+                self.displayResources("bob");
             })
             .fail(function () {
                 $('body').html(data.msg);
@@ -45,18 +39,21 @@ Inventory = class Inventory{
         ;
     }
 
+    setResource(id, amount){
+        this.resourceInventory[id] += amount;
+    }
+
     displayResources () {
-        //console.log(this.resources);
-        /*for (let resource in this.resourceInventory){
-            console.log(this.resources[resource][0] + " : " + this.resourceInventory[resource]);
-        }*/
+        console.log(this.resourceInventory);
+
         let txt = "";
-        for(let i= 0; i < this.resourceInventory.length; ++i){
-            txt += this.resources[this.resourceInventory[i][0]][0] + " : " + this.resourceInventory[i][1] + " - ";
+        for (let resource in this.resourceInventory){
+            txt += this.resources[resource][0] + " : " + this.resourceInventory[resource] + "\n";
         }
+        /*for(let i= 0; i < this.resourceInventory.length; ++i){
+            txt += this.resources[this.resourceInventory[i][0]][0] + " : " + this.resourceInventory[i][1] + " - ";
+        }*/
 
         $('.resourcesInventory').html(txt);
     }
 }
-
-})();

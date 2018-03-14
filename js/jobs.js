@@ -1,21 +1,21 @@
-    let Job;
-    (function () {
-        "use strict";
-
-        Job = class Job {
-            constructor() {
-
-            }
+class Job {
+        constructor(name, exp) {
+            this.name = name;
+            this.exp = exp;
         }
 
+        addExp(amount){
+            this.exp += amount;
+        }
 
-    })();
+    displayJob () {
+        $('.job1').css("width: " + this.exp + "%");
+        console.log("width: " + this.exp + "%");
 
-//Variable
-var wood = 0
 
-//Click Function
-$("#click").on("mousedown", function(){
-    wood = wood + 1;
-    $("#click").html("Click " + wood);
-});
+        /*for(let i= 0; i < this.resourceInventory.length; ++i){
+            txt += this.resources[this.resourceInventory[i][0]][0] + " : " + this.resourceInventory[i][1] + " - ";
+        }*/
+    }
+
+    }

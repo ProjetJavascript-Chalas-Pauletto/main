@@ -73,8 +73,9 @@
         }, 6600); //6600
 
         let init = function(){
-            console.log("Initialising menu...");
-            let menu = new Menu();
+            console.log("Initialising Game...");
+            let game = new Game();
+
         };
 
 

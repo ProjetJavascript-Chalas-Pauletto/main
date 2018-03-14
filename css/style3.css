@@ -48,35 +48,48 @@ body  {
 
 /* MENU PANELS */
 .bt-overlay {
-	position: absolute;
 	width: 100%;
 	opacity: 0;
-	display: grid;
-	overflow: auto;
 	-webkit-transition: opacity 0.3s;
 	transition: opacity 0.3s;
 }
 
-.jobs-panel {
+.bt-overlay-panel {
 	opacity: 1;
+}
+
+.jobs-panel {
+	display: grid;
+	width: 100%;
+	height: 100%;
+	overflow: auto;
 	background: darkslategray;
 	grid-template-columns: auto auto;
 }
 
 .inventory-panel {
-	opacity: 1;
+	display: grid;
+	width: 100%;
+	height: 100%;
+	overflow: auto;
 	background: darkmagenta;
 	grid-template-columns: 50% auto;
 	grid-template-rows: 50% auto;
 }
 
 .map-panel {
-	opacity: 1;
+	display: grid;
+	width: 100%;
+	height: 100%;
+	overflow: auto;
 	background: aquamarine;
 }
 
 .skills-panel {
-	opacity: 1;
+	display: grid;
+	width: 100%;
+	height: 100%;
+	overflow: auto;
 	background: lightgreen;
 }
 
