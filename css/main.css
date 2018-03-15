@@ -386,7 +386,7 @@ html{
 
     display: grid;
     grid-template-columns: 25% 50% 25%;
-    grid-template-rows: 20% 20% auto;
+    grid-template-rows: 30% 30% auto;
 }
 
 .healthBar {
@@ -397,6 +397,14 @@ html{
     margin-left: 2%;
     margin-right: 2%;
     grid-column: 2;
+}
+
+.expBar {
+    grid-column: 1;
+    grid-row: 3;
+    grid-column-start: 1;
+    grid-column-end: 4;
+    align-self: end;
 }
 
 #positionInfos {

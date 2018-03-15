@@ -4,6 +4,7 @@ class Game {
             this.map = null;
             this.inventory = new Inventory();
             this.menu = null;
+            this.character = new Character(0,250,15);
 
             this.init();
         }
@@ -42,15 +43,17 @@ class Game {
                     $('body').html(data.msg);
                 });
 
-
-
-
-
-
             $("#click").click(function () {
                 self.jobs[1].addExp(1);
                 self.inventory.setResource(1,1);
                 $("#click").html(self.jobs[1].exp);
             });
+
+            let test = setInterval(this.character.setHp(1),100);
         }
+
+
+    displayOnLog(string,typeClass) {
+        $('#log').append($('<div />').addClass(typeClass).html(string));
+    }
     }
