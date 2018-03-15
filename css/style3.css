@@ -83,6 +83,9 @@ body  {
 	height: 100%;
 	overflow: auto;
 	background: aquamarine;
+	font-size: large;
+	font-weight: bold;
+	text-align: center;
 }
 
 .skills-panel {

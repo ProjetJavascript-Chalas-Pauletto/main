@@ -1,37 +1,74 @@
 class Game {
-        constructor() {
-            this.jobs = {}; //Contient les différents métiers
-            this.map = new mapM(); // VOICI LA MAP BAPTISTE
-            this.inventory = new Inventory();
-            this.menu = null;
+    constructor() {
+        this.jobs = {}; //Contient les différents métiers
+        this.map = null;
+        this.inventory = new Inventory();
+        this.menu = null;
 
-            this.init();
-        }
-
-        init() {
-            let self = this;
-            console.log("loading jobs");
-            $.ajax({
-                url: '/json/loadJobs.php'
-            })
-                .done(function (data) {
-                    for (let job in data.jobs) {
-                        self.jobs[job] = new Job(data.jobs[job], data.playerJobs[job]);
-                        console.log(data.jobs[job] + " loaded with : " + data.playerJobs[job] + " exp");
-                    }
-                    console.log("All Jobs loaded successfully !");
-                    console.log(self.jobs);
-                    self.menu = new Menu(self.inventory, self.jobs);
-                })
-                .fail(function () {
-                    $('body').html(data.msg);
-                })
-            ;
-
-            $("#click").click(function () {
-                self.jobs[1].addExp(1);
-                self.inventory.setResource(1,1);
-                $("#click").html(self.jobs[1].exp);
-            });
-        }
+        this.init();
     }
+
+    init() {
+        let self = this;
+        console.log("loading jobs");
+        $.ajax({
+            url: '/json/loadJobs.php'
+        })
+            .done(function (data) {
+                for (let job in data.jobs) {
+                    self.jobs[job] = new Job(data.jobs[job], data.playerJobs[job]);
+                    console.log(data.jobs[job] + " loaded with : " + data.playerJobs[job] + " exp");
+                }
+                console.log("All Jobs loaded successfully !");
+                console.log(self.jobs);
+                self.menu = new Menu(self.inventory, self.jobs);
+
+                $.ajax({
+                    url: '../json/mapDB.php'
+                })
+                    .done(function (data) {
+                        self.map = new mapM(5,5,'#map',data);
+                        self.map.createMap();
+                        //$(".lake_case").addClass("lake_case");
+                        //$(".village_case").addClass("village_case");
+                        //$(".forest_case").addClass("forest_case");
+                    })
+                    .fail(function () {
+                        $("body").html(erreurCritique);
+                    });
+
+            })
+            .fail(function () {
+                $('body').html(data.msg);
+            });
+
+        $("#click").click(function () {
+            self.jobs[1].addExp(1);
+            self.inventory.setResource(1,1);
+            $("#click").html(self.jobs[1].exp);
+        });
+    }
+
+    static log(string,typeClass) {
+        $('#logMessages').prepend($('<div />').addClass(typeClass).html(string));
+    }
+
+    static updatePosition (pos_x,pos_y,type)  {
+        $('.playerPosition').remove();
+        $('.playerPositionType').remove();
+        $('#positionInfos').append($('<div />').addClass('playerPosition').html(pos_x + "," + pos_y));
+        $('#positionInfos').append($('<div />').addClass('playerPositionType').html(type));
+    };
+
+
+    /*
+
+            updatePosition(3,3, "Village");
+            updatePosition(2,1, "Forest");
+
+            displayOnLog("You arrived in town !","logMessagePosition");
+            displayOnLog("You choped 2 wood logs !","logMessageRessource");
+            displayOnLog("You ran out of HP !","logMessageWarning");
+    */
+
+}

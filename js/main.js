@@ -1,5 +1,3 @@
-let displayOnLog;
-let updatePosition;
 (function () {
     "use strict";
 
@@ -27,25 +25,6 @@ let updatePosition;
         $('#password').css(cssClear);
         $('#mail').css(cssClear);
     }
-
-    displayOnLog = (string,typeClass) => {
-        $('#log').append($('<div />').addClass(typeClass).html(string));
-    };
-
-    updatePosition = (pos_x,pos_y,type) => {
-        $('.playerPosition').empty();
-        $('.playerPositionType').empty();
-        $('#positionInfos').append($('<div />').addClass('playerPosition').html(pos_x + "," + pos_y));
-        $('#positionInfos').append($('<div />').addClass('playerPositionType').html(type));
-    };
-
-    updatePosition(3,3, "Village");
-    updatePosition(2,1, "Forest");
-
-    displayOnLog("You arrived in town !","logMessagePosition");
-    displayOnLog("You choped 2 wood logs !","logMessageRessource");
-    displayOnLog("You ran out of HP !","logMessageWarning");
-
 
 
     $(() => {
