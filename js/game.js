@@ -4,7 +4,7 @@ class Game {
             this.map = null;
             this.inventory = new Inventory();
             this.menu = null;
-            this.character = new Character(0,250,15);
+            this.character = new Character(250,250,100);
 
             this.init();
         }
@@ -47,9 +47,12 @@ class Game {
                 self.jobs[1].addExp(1);
                 self.inventory.setResource(1,1);
                 $("#click").html(self.jobs[1].exp);
+
+                self.character.setHp(-30);
             });
 
-            let test = setInterval(this.character.setHp(1),100);
+            this.character.startActivity();
+
         }
 
 
