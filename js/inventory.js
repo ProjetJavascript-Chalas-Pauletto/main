@@ -31,7 +31,7 @@ class Inventory{
                 self.resourceInventory = data.resources;
                 console.log("Inventory resources loaded ! ");
                 console.log(self.resourceInventory);
-                self.displayResources("bob");
+                self.displayResources();
             })
             .fail(function () {
                 $('body').html(data.msg);

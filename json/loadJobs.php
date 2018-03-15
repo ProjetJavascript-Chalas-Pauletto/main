@@ -14,7 +14,7 @@ $playerJobs = loadPlayerJobs($_SESSION['id']);
 
 //Jobs
 while ($row = $jobs->fetch()) {
-    $result->jobs[$row["ID"]] = array($row['NAME']);
+    $result->jobs[$row["ID"]] = $row['NAME'];
 }
 
 //PlayerJobs

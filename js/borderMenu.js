@@ -66,13 +66,13 @@ class Menu {
             Create Job PANEL
             #############################"*/
             let jobsPanel = createPanel('jobs-panel');
-            for (let i = 0; i < 8; i++) {
-                let job = $('<div />').addClass("jobSkill");
+            for (let jobID in this.jobs) {
+                let job = $('<div />').addClass("jobSkill " + this.jobs[jobID].name);
                 let exp = $('<div />').addClass("progress");
-                let progress = $('<div />').addClass("progress-bar progress-bar-striped progress-bar-animated job" + i).css("width", i * (100 / 8) + "%").html(i * (100 / 8) + "%");
+                let progress = $('<div />').addClass("progress-bar progress-bar-striped progress-bar-animated");
                 exp.append(progress);
                 //Add image skill
-                let icon = $('<img />').attr("src", "img/jobs/lumberjack.png");
+                let icon = $('<img />').attr("src", "img/jobs/" + this.jobs[jobID].name + ".png");
                 job.append(exp);
                 job.append(icon);
                 jobsPanel.append(job);
@@ -139,10 +139,9 @@ class Menu {
             //Open Jobs Panel
             $("#bt-jobs").on(this.eventType, function () {
                 if (self.openPanel("Jobs", "jobs-panel")) {
-                    self.jobs[1].displayJob();
-                    /*for (let job in self.jobs){
+                    for (let job in self.jobs){
                         self.jobs[job].displayJob();
-                    }*/
+                    }
                 }
             });
 
