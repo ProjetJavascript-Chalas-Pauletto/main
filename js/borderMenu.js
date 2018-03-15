@@ -139,9 +139,10 @@ class Menu {
             //Open Jobs Panel
             $("#bt-jobs").on(this.eventType, function () {
                 if (self.openPanel("Jobs", "jobs-panel")) {
-                    for (let job in self.jobs){
+                    self.jobs[1].displayJob();
+                    /*for (let job in self.jobs){
                         self.jobs[job].displayJob();
-                    }
+                    }*/
                 }
             });
 

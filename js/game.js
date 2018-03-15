@@ -1,6 +1,7 @@
 class Game {
         constructor() {
-            this.jobs = []; //Contient les différents métiers
+            this.jobs = {}; //Contient les différents métiers
+            this.map = new Map(); // VOICI LA MAP BAPTISTE
             this.inventory = new Inventory();
             this.menu = null;
 
@@ -15,7 +16,7 @@ class Game {
             })
                 .done(function (data) {
                     for (let job in data.jobs) {
-                        self.jobs.push(new Job(data.jobs[job], data.playerJobs[job]));
+                        self.jobs[job] = new Job(data.jobs[job], data.playerJobs[job]);
                         console.log(data.jobs[job] + " loaded with : " + data.playerJobs[job] + " exp");
                     }
                     console.log("All Jobs loaded successfully !");
@@ -28,9 +29,9 @@ class Game {
             ;
 
             $("#click").click(function () {
-                self.jobs[0].addExp(1);
+                self.jobs[1].addExp(1);
                 self.inventory.setResource(1,1);
-                $("#click").html(self.jobs[0].exp);
+                $("#click").html(self.jobs[1].exp);
             });
         }
     }
