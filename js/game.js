@@ -1,7 +1,7 @@
 class Game {
         constructor() {
             this.jobs = {}; //Contient les différents métiers
-            this.map = new mapM(); // VOICI LA MAP BAPTISTE
+            this.map = null;
             this.inventory = new Inventory();
             this.menu = null;
 
@@ -22,11 +22,30 @@ class Game {
                     console.log("All Jobs loaded successfully !");
                     console.log(self.jobs);
                     self.menu = new Menu(self.inventory, self.jobs);
+
+                    $.ajax({
+                        url: '../json/mapDB.php'
+                    })
+                        .done(function (data) {
+                            self.map = new mapM(5,5,'#map',data);
+                            self.map.createMap();
+                            //$(".lake_case").addClass("lake_case");
+                            //$(".village_case").addClass("village_case");
+                            //$(".forest_case").addClass("forest_case");
+                        })
+                        .fail(function () {
+                            $("body").html(erreurCritique);
+                        });
+
                 })
                 .fail(function () {
                     $('body').html(data.msg);
-                })
-            ;
+                });
+
+
+
+
+
 
             $("#click").click(function () {
                 self.jobs[1].addExp(1);

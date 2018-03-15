@@ -1,11 +1,11 @@
 class Menu {
-        constructor(inventory, jobs, map) {
+        constructor(inventory, jobs) {
             console.log("Menu Loading");
             this.eventType = this.mobileCheck() ? 'touchstart' : 'click';
             this.menu = $('#bt-menu');//$('#bt-menu');
             this.overlay = this.createOverlay();
 
-            this.map = map;
+            //this.map = map;
             this.inventory = inventory;
             this.jobs = jobs;
 
@@ -113,20 +113,6 @@ class Menu {
             progress.append(bar);
             mapPanel.append(progress);
             mapPanel.append(map);
-
-            $.ajax({
-                url: '../json/mapDB.php'
-            })
-                .done(function (data) {
-                    let map = new mapM(5,5,'#map',data);
-                    map.createMap();
-                    //$(".lake_case").addClass("lake_case");
-                    //$(".village_case").addClass("village_case");
-                    //$(".forest_case").addClass("forest_case");
-                })
-                .fail(function () {
-                    $("body").html(erreurCritique);
-                });
 
             /*##############################
             Create SKILL PANEL
