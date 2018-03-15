@@ -58,7 +58,34 @@ JOBS
 Map
 ========================================================================== */
 
+#posPlayer {
+    width: 50px;
+    height: 50px;
+    box-sizing: border-box;
+    border: 2px solid red;
+    background-image: url("/img/sprites/player50.png");
+}
 
+.lake_case {
+background-image: url('/img/sprites/lake50.png');
+width: 50px;
+height: 50px;
+display: inline-block;
+}
+
+.village_case {
+background-image: url('/img/sprites/village50.png');
+width: 50px;
+height: 50px;
+display: inline-block;
+}
+
+.forest_case {
+background-image : url('/img/sprites/forest50.png');
+width: 50px;
+height: 50px;
+display: inline-block;
+}
 
 
 /* ==========================================================================
@@ -339,6 +366,66 @@ html{
 
 .gameLeft{
     background: #2980b9;
+    display: grid;
+    grid-template-columns: 100%;
+    grid-template-rows: 50% 50%;
+}
+
+#positionInfos {
+    border: 1px dashed whitesmoke;
+    box-shadow: 0 0 0 3px #fff, 0 0 0 5px black, 0 0 0 10px saddlebrown, 0 0 2px 10px saddlebrown;
+    margin: 20%;
+    text-align: center;
+}
+
+#positionInfos p {
+    margin-bottom: 0%;
+}
+
+#positionTitle {
+    padding-top: 5% ;
+    color: orange;
+}
+
+.playerPosition {
+    font-size: 200%;
+    color: crimson ;
+}
+
+.playerPositionType {
+    padding-top: 2%;
+    font-size: 120%;
+    color: lightgrey;
+}
+
+
+#log {
+    border-top: 2px dashed sandybrown;
+    border-bottom: 1px dashed sandybrown;
+    box-shadow: inset 0 -1px 0 0 sandybrown, inset 0 1px 0 0 sandybrown, 0 1px 0 0 sandybrown, 0 -1px 0 0 sandybrown;
+    margin: 5%;
+    position: relative;
+}
+
+#logTitle{
+    padding-top: 3% ;
+    text-align: center;
+    color : white;
+}
+
+.logMessagePosition{
+    position: relative;
+    color: yellow;
+}
+
+.logMessageRessource{
+    position: relative;
+    color: greenyellow;
+}
+
+.logMessageWarning{
+    position: relative;
+    color: red;
 }
 
 .gameMiddle{
@@ -354,10 +441,6 @@ html{
     grid-column-start: 1;
     grid-column-end: 4;
 }
-
-
-
-
 
 
 /*
@@ -533,9 +616,9 @@ textarea {
 }
 
 @media print,
-       (-webkit-min-device-pixel-ratio: 1.25),
-       (min-resolution: 1.25dppx),
-       (min-resolution: 120dpi) {
+(-webkit-min-device-pixel-ratio: 1.25),
+(min-resolution: 1.25dppx),
+(min-resolution: 120dpi) {
     /* Style adjustments for high resolution devices */
 }
 

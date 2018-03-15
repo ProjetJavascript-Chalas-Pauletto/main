@@ -1,7 +1,7 @@
 class Game {
         constructor() {
             this.jobs = {}; //Contient les différents métiers
-            this.map = new Map(); // VOICI LA MAP BAPTISTE
+            this.map = new mapM(); // VOICI LA MAP BAPTISTE
             this.inventory = new Inventory();
             this.menu = null;
 

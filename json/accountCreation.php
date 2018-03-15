@@ -13,6 +13,11 @@ if ($_POST['username'] != "" && $_POST['password'] != "" && $_POST['passwordChec
     $password = $_POST['password'];
     $mail = $_POST['mail'];
 
+    if (strlen($password) <= 14){
+        $resultat->result= false;
+        $resultat->message= 'Password is too easy';
+    }
+
     $pdo = getDb();
     $sql1 = "SELECT * FROM USER WHERE USERNAME = :username";
     $stmtU = $pdo->prepare($sql1);

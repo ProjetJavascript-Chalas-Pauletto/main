@@ -1,3 +1,5 @@
+let displayOnLog;
+let updatePosition;
 (function () {
     "use strict";
 
@@ -6,34 +8,6 @@
     let criticalError =
         "Une erreur critique vient de se produire," + //Spreading mail adress in order to prohibit bots from getting it.
         "veuillez contacter l'administrateur à cette adresse mail : chalas." + ((true) ? 'paule' : "") + "tto@gm" +"a"+"il"+".co"+"m";
-
-    let css_blanc = {
-        'background-color': 'black',
-        'font-size': 'bolder',
-        'border': 'solid 1px white',
-        'color': 'white',
-        'height': '30px',
-        'width': '30px',
-        'text-align': 'center'
-    };
-    let css_noir = {
-        'background-color': 'yellow',
-        'font-size': 'bolder',
-        'border': 'solid 1px black',
-        'color': 'black',
-        'height': '30px',
-        'width': '30px',
-        'text-align': 'center'
-    };
-    let css_enhanced = {
-        'background-color': 'red',
-        'font-size': 'bolder',
-        'border': 'solid 1px black',
-        'color': 'white',
-        'height': '30px',
-        'width': '30px',
-        'text-align': 'center'
-    };
 
     let cssError = {
         'background-color' :'#eeeeee',
@@ -54,17 +28,24 @@
         $('#mail').css(cssClear);
     }
 
-        /* $('.case-blanche').css(css_blanc).hover(function () {
-            $(this).css(css_enhanced);
-        }, function () {
-            $(this).css(css_blanc);
-        });
+    displayOnLog = (string,typeClass) => {
+        $('#log').append($('<div />').addClass(typeClass).html(string));
+    };
 
-        $('.case-noire').css(css_noir).hover(function () {
-            $(this).css(css_enhanced);
-        }, function () {
-            $(this).css(css_noir);
-        }); */
+    updatePosition = (pos_x,pos_y,type) => {
+        $('.playerPosition').empty();
+        $('.playerPositionType').empty();
+        $('#positionInfos').append($('<div />').addClass('playerPosition').html(pos_x + "," + pos_y));
+        $('#positionInfos').append($('<div />').addClass('playerPositionType').html(type));
+    };
+
+    updatePosition(3,3, "Village");
+    updatePosition(2,1, "Forest");
+
+    displayOnLog("You arrived in town !","logMessagePosition");
+    displayOnLog("You choped 2 wood logs !","logMessageRessource");
+    displayOnLog("You ran out of HP !","logMessageWarning");
+
 
 
     $(() => {
@@ -121,6 +102,10 @@
                                 $('#password').css(cssError);
                                 $('#passwordCheck').css(cssError);
                                 $('#errorLogin').html('Passwords must match').show();
+                                break;
+                            case 'Password is too easy':
+                                $('#password').css(cssError);
+                                $('#errorLogin').html('The password you have chosen is too easy, it should at least be 15 characters long').show();
                                 break;
                             default:
                                 $('#errorLogin').html('An unknown error has occured, please try again').show();
