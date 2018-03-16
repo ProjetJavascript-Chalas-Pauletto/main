@@ -23,6 +23,27 @@ try
     $tmp = $stmtPos->fetch();
     $resultat->pos['POS_X']= $tmp['POS_X'];
     $resultat->pos['POS_Y']= $tmp['POS_Y'];
+
+    $sqlLand = "SELECT ATTRIBUTS FROM MAP WHERE POS_X = :pos_x AND POS_Y = :pos_y";
+    $stmtLand = $pdo->prepare($sqlLand);
+    $stmtLand->bindValue('pos_x', $tmp['POS_X'] , PDO::PARAM_INT);
+    $stmtLand->bindValue('pos_y', $tmp['POS_Y'] , PDO::PARAM_INT);
+
+    $stmtLand->execute();
+    $stmtLand->setFetchMode(PDO::FETCH_ASSOC);
+    $tmpLand = $stmtLand->fetch();
+    $resultat->landType = $tmpLand['ATTRIBUTS'];
+    switch ($resultat->landType){
+        case "FOREST":
+            $resultat->ressourceId = 1;
+            break;
+        case "LAKE":
+            $resultat->ressourceId = 3;
+            break;
+        case "VILLAGE":
+            $resultat->ressourceId = 2;
+            break;
+    }
 }
 catch (PDOException $e)
 {

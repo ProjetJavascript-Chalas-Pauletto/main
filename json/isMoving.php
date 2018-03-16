@@ -62,6 +62,18 @@ try
             $tmpLand = $stmtLand->fetch();
             $resultat->landType = $tmpLand['ATTRIBUTS'];
 
+            switch ($resultat->landType){
+                case "FOREST":
+                    $resultat->ressourceId = 1;
+                    break;
+                case "LAKE":
+                    $resultat->ressourceId = 3;
+                    break;
+                case "VILLAGE":
+                    $resultat->ressourceId = 2;
+                    break;
+            }
+
             $stmtUpdate->execute();
             $resultat->result = false;
             $resultat->message = "Travel finished";

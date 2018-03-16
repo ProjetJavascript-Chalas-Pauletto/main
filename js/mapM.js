@@ -23,8 +23,9 @@ let mapM;
                 .done(function (data) {
                     if(data.result){ // If everything went right we look for the player's position
                         self.tab[data.pos['POS_X']][data.pos['POS_Y']].append($('<div />').attr("id","posPlayer"));
-                        Game.log("Welcome back, last time you were on : " + data.pos['POS_X'] + "," + data.pos['POS_Y'] + " !", "logMessagePosition");
-                        Game.updatePosition(data.pos['POS_X'], data.pos['POS_Y'], "A great resting place")
+                        Game.log("Welcome back, last time you were on " + data.landType + " : (" + data.pos['POS_X'] + "," + data.pos['POS_Y'] + ") !", "logMessagePosition");
+                        Game.updatePosition(data.pos['POS_X'], data.pos['POS_Y'], "A peaceful resting place");
+                        Game.updateActivity(data.ressourceId,data.landType);
                     }
                 })
                 .fail(function () {
@@ -96,7 +97,7 @@ let mapM;
                                         $('#alertMovingMessage').hide();
                                         console.log("Travel Started !");
                                         console.log("Set isMoving Timeout to : " + data.timeLength + "ms");
-                                        Game.log("You started traveling to " + x + "," + y +" !","logMessagePosition");
+                                        Game.log("You started traveling to (" + x + "," + y +") !","logMessagePosition");
                                         self.startTimer(data.timeLength);
                                         self.timeCheck = setTimeout(isMoving, data.timeLength);
                                     } else { // Erreur de déplacement ?
@@ -142,7 +143,7 @@ let mapM;
                             self.tab[data.pos['POS_X_DEST']][data.pos['POS_Y_DEST']].append($('<div />').attr("id","posPlayer"));
                             Game.log("You arrived to " + data.landType + " (" + data.pos['POS_X_DEST'] + "," + data.pos['POS_Y_DEST'] + ") !", "logMessagePosition" );
                             Game.updatePosition(data.pos['POS_X_DEST'],data.pos['POS_Y_DEST'],data.landType);
-                            console.log(data.message);
+                            Game.updateActivity(data.ressourceId,data.landType);
                         } else {
                             console.log(data.message);
                         }

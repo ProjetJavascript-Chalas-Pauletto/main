@@ -53,6 +53,13 @@ JOBS
     max-height:90%;
 }
 
+.jobButton {
+    font-weight: bold;
+    border: 2px solid brown;
+    border-radius: 10px 100px / 120px;
+    display: inline-block;
+}
+
 
 /* ==========================================================================
 Map
@@ -363,6 +370,10 @@ html{
     grid-template-rows: 80% 20%;
 }
 
+/* ==========================================================================
+   Left part of the game
+   ========================================================================== */
+
 .gameLeft{
     background: #2980b9;
     display: grid;
@@ -397,7 +408,6 @@ html{
     color: lightgrey;
 }
 
-
 #log {
     max-height: 90%;
     width: 90%;
@@ -430,8 +440,28 @@ html{
     color: red;
 }
 
+/* ==========================================================================
+   Middle part of the game
+   ========================================================================== */
+
+#forest_type {
+    background-color: darkseagreen;
+}
+
+#lake_type {
+    background-color: cornflowerblue;
+}
+
+#village_type {
+    background-color: beige;
+}
+
 .gameMiddle{
     background: #333333;
+}
+
+#mainActivity {
+
 }
 
 .gameRight{
