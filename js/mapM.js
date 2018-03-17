@@ -166,8 +166,8 @@ let mapM;
                         case "LAKE":
                             type = "lake_case";
                             break;
-                        case "VILLAGE":
-                            type = "village_case";
+                        case "MINE":
+                            type = "mine_case";
                             break;
                         default:
                             $('body').html("Something strange happened");

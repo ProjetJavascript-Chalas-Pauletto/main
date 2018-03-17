@@ -28,9 +28,7 @@ class Game {
                     .done(function (data) {
                         self.map = new mapM(5, 5, '#map', data);
                         self.map.createMap();
-                        //$(".lake_case").addClass("lake_case");
-                        //$(".village_case").addClass("village_case");
-                        //$(".forest_case").addClass("forest_case");
+
                     })
                     .fail(function () {
                         $("body").html(erreurCritique);
@@ -79,11 +77,11 @@ class Game {
                 activityStore = "Store choped wood logs";
                 mapTypeId = "forest_type";
                 break;
-            case "VILLAGE":
+            case "MINE":
                 ressourceName = " stones";
-                activityName = "Steal stone";
-                activityStore = "Store stolen stone";
-                mapTypeId = "village_type";
+                activityName = "Mine stone";
+                activityStore = "Store mined stone";
+                mapTypeId = "mine_type";
                 break;
             case "LAKE":
                 ressourceName = " fishs";
@@ -116,10 +114,12 @@ class Game {
                 });
         };
 
+
+
         //Adding all the treatment to the game.
         $('.gameMiddle').attr("id", mapTypeId);
-        $('#mainActivity').append($("<button />").addClass("jobButton").html(activityName).click(click_activity_farm));
-        $('#mainActivity').append($("<button />").addClass("jobButton").html(activityStore).click(click_activity_save));
+        $('#mainActivity').append($("<button />").addClass("jobButton btn-lg grow").html(activityName).click(click_activity_farm));
+        $('#mainActivity').append($("<button />").addClass("jobButton btn-lg grow").html(activityStore).click(click_activity_save));
     }
 
 }

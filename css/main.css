@@ -53,11 +53,25 @@ JOBS
     max-height:90%;
 }
 
+
+/* Property used for scaling the jobButtons on main menu*/
+.grow { transition: all .2s ease-in-out; }
+.grow:hover { transform: scale(1.048); }
+/*-----------------------------------*/
+
 .jobButton {
     font-weight: bold;
+    width: 30%;
+    margin: 3%;
     border: 2px solid brown;
     border-radius: 10px 100px / 120px;
     display: inline-block;
+}
+
+.jobButton:active {
+    background-color: darkgrey;
+    box-shadow: 0 5px #666;
+    transform: translateY(4px);
 }
 
 
@@ -80,8 +94,8 @@ height: 50px;
 display: inline-block;
 }
 
-.village_case {
-background-image: url('/img/sprites/village50.png');
+.mine_case {
+background-image: url('/img/sprites/mine50.png');
 width: 50px;
 height: 50px;
 display: inline-block;
@@ -446,14 +460,23 @@ html{
 
 #forest_type {
     background-color: darkseagreen;
+    background-image: url("/img/sprites/forest_place400.png");
+    background-repeat: no-repeat;
+    background-position: center;
 }
 
 #lake_type {
     background-color: cornflowerblue;
+    background-image: url("/img/sprites/lake_place400.png"); /* This image has been taken from the web but we will do one by ouserlves in the shortest times. */
+    background-repeat: no-repeat;
+    background-position: center;
 }
 
-#village_type {
+#mine_type {
     background-color: beige;
+    background-image: url("/img/sprites/rocky_place400.png");
+    background-repeat: no-repeat;
+    background-position: center;
 }
 
 .gameMiddle{
@@ -461,7 +484,7 @@ html{
 }
 
 #mainActivity {
-
+    text-align: center;
 }
 
 .gameRight{

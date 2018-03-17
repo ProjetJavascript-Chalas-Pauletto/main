@@ -58,6 +58,7 @@ class Menu {
         return false;
     }
 
+
     createMenu(){
         let createPanel = function (title){
             return $('<div />').addClass(title).css("display", "none");
