@@ -44,16 +44,37 @@ class Inventory{
     }
 
     displayResources () {
-        console.log(this.resourceInventory);
+        let resourcesInventory =  $('.resourcesInventory');
 
-        let txt = "";
+        resourcesInventory.empty();
+
+
         for (let resource in this.resourceInventory){
-            txt += this.resources[resource][0] + " : " + this.resourceInventory[resource] + "\n";
+            let resourceName = this.resources[resource][0];
+
+            //Tooltip Info
+            let infos = "<h3>" + resourceName + "<span class=\"badge badge-danger\">"+ resource +"</span></h3><p>Quantity : " + this.resourceInventory[resource] + "</p><p>Size : "+ this.resources[resource][1]*this.resourceInventory[resource] +"</p>"
+
+            //Tooltip + modal
+            let tooltip = $('<span />').attr("data-toggle", "tooltip").attr("data-html", "true").attr("title", infos);
+            let modal = $('<a />').attr("data-toggle","modal").attr("href","#resourceManager");
+
+            tooltip.append(modal);
+
+            let icon = $('<img />').attr("src", "img/resources/" + resourceName + ".png");
+            modal.append(icon);
+            //NumberTxt
+            let nbResources = $('<div />').addClass("resourceDisplay").append($('<span />').addClass("badge badge-info").html(this.resourceInventory[resource]));
+
+            resourcesInventory.append($('<div />').addClass(resourceName).append(tooltip).append(nbResources));
         }
+
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip()
+        });
         /*for(let i= 0; i < this.resourceInventory.length; ++i){
             txt += this.resources[this.resourceInventory[i][0]][0] + " : " + this.resourceInventory[i][1] + " - ";
         }*/
 
-        $('.resourcesInventory').html(txt);
     }
 }

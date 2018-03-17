@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="670a6bb0-7a8d-406b-908e-500af48b7e5c" name="Ozenix-RPG" url="http://enhanced-rpg.alwaysdata.net">
+        <fileTransfer host="ftp-enhanced-rpg.alwaysdata.net" port="21">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" passiveMode="true" showHiddenFiles="true" />
+          </advancedOptions>
+          <option name="port" value="21" />
+        </fileTransfer>
+      </webServer>
+      <webServer id="7feb9eb5-bb83-40db-91c0-ea89c3c78329" name="JSBAPT" url="http://jsbapt.alwaysdata.net">
+        <fileTransfer host="ftp-jsbapt.alwaysdata.net" port="21">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" passiveMode="true" showHiddenFiles="true" />
+          </advancedOptions>
+          <option name="port" value="21" />
+        </fileTransfer>
+      </webServer>
+      <webServer id="3a7dfba2-95f5-45dc-ad0c-a7086cece71d" name="Pauletto" url="http://pauletto.alwaysdata.net">
+        <fileTransfer host="ftp-pauletto.alwaysdata.net" port="21">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" passiveMode="true" showHiddenFiles="true" />
+          </advancedOptions>
+          <option name="port" value="21" />
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>

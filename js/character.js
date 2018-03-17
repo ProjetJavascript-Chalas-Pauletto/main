@@ -67,7 +67,7 @@ class Character {
     }
 
     die(){
-        console.log("You died...");
+        Game.log("You died...", "logMessageWarning");
     }
 
 }

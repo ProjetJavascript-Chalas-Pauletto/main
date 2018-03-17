@@ -1,5 +1,34 @@
 /*! HTML5 Boilerplate v6.0.1 | MIT License | https://html5boilerplate.com/ */
 
+.tooltip.top .tooltip-arrow {
+    border-top-color: #00acd6;
+}
+
+.tooltip.right .tooltip-arrow {
+    border-right-color: #00acd6;
+}
+
+.tooltip.bottom .tooltip-arrow {
+    border-bottom-color: #00acd6;
+}
+
+.tooltip.left .tooltip-arrow {
+    border-left-color: #00acd6;
+}
+
+.tooltip-inner {
+    padding: 16px;
+    max-width: 300px;
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    border-radius: 0;
+    background-color: #FFFFFF;
+    color: #26292E;
+    text-align: center;
+    text-decoration: none;
+}
+
+
 /* ==========================================================================
 INVENTORY
 ========================================================================== */
@@ -18,8 +47,55 @@ INVENTORY
 }
 
 .resourcesInventory{
+    display: grid;
+
+    overflow: auto;
+    grid-template-columns: 20% 20% 20% 20% 20%;
+    grid-template-rows: repeat(4,25%);
+
     background: yellow;
 }
+
+.resourcesInventory > div {
+    margin: auto;
+    width: 90%;
+    height: 90%;
+    position: relative;
+    background-color: #333333;
+    border-radius: 3px
+}
+
+.resourcesInventory > div:hover {
+    background: #555555;
+
+}
+
+.resourcesInventory .resourceDisplay {
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    color: white;
+}
+
+.resourcesInventory img {
+    align-self: center;
+    margin: auto;
+    height: 80%;
+    width: auto;
+
+    transition: transform .2s; /* Animation */
+}
+
+.resourcesInventory span,a {
+    display: flex;
+    height: 100%;
+    width: 100%;
+}
+
+.resourcesInventory img:hover {
+    transform: scale(1.2);
+}
+
 .itemsInventory {
     overflow: auto;
 }

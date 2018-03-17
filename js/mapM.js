@@ -23,6 +23,9 @@ let mapM;
                 .done(function (data) {
                     if(data.result){ // If everything went right we look for the player's position
                         self.tab[data.pos['POS_X']][data.pos['POS_Y']].append($('<div />').attr("id","posPlayer"));
+                        Game.log("Welcome back, last time you were on " + data.landType + " : (" + data.pos['POS_X'] + "," + data.pos['POS_Y'] + ") !", "logMessagePosition");
+                        Game.updatePosition(data.pos['POS_X'], data.pos['POS_Y'], "A peaceful resting place");
+                        Game.updateActivity(data.ressourceId,data.landType);
                     }
                 })
                 .fail(function () {
@@ -91,8 +94,10 @@ let mapM;
                             })
                                 .done(function (data) {
                                     if (data.result){ // If the player starts moving
+                                        $('#alertMovingMessage').hide();
                                         console.log("Travel Started !");
                                         console.log("Set isMoving Timeout to : " + data.timeLength + "ms");
+                                        Game.log("You started traveling to (" + x + "," + y +") !","logMessagePosition");
                                         self.startTimer(data.timeLength);
                                         self.timeCheck = setTimeout(isMoving, data.timeLength);
                                     } else { // Erreur de déplacement ?
@@ -103,7 +108,8 @@ let mapM;
                                     $('body').html(data.msg);
                                 });
                         } else { // When the player is moving, we just wait and do nothing else.
-                            console.log("You are already moving !")
+                            console.log("You are already moving !");
+                            $('#alertMovingMessage').html("You are already moving, Sm'orc !").show()
                         }
                     }).fail(function () {
                     $('body').html(data.msg);
@@ -135,7 +141,9 @@ let mapM;
                         } else if (data.message === "Travel finished"){ //When traveling will be done
                             self.tab[data.pos['POS_X_INIT']][data.pos['POS_Y_INIT']].empty();
                             self.tab[data.pos['POS_X_DEST']][data.pos['POS_Y_DEST']].append($('<div />').attr("id","posPlayer"));
-                            console.log(data.message);
+                            Game.log("You arrived to " + data.landType + " (" + data.pos['POS_X_DEST'] + "," + data.pos['POS_Y_DEST'] + ") !", "logMessagePosition" );
+                            Game.updatePosition(data.pos['POS_X_DEST'],data.pos['POS_Y_DEST'],data.landType);
+                            Game.updateActivity(data.ressourceId,data.landType);
                         } else {
                             console.log(data.message);
                         }
@@ -158,8 +166,8 @@ let mapM;
                         case "LAKE":
                             type = "lake_case";
                             break;
-                        case "VILLAGE":
-                            type = "village_case";
+                        case "MINE":
+                            type = "mine_case";
                             break;
                         default:
                             $('body').html("Something strange happened");

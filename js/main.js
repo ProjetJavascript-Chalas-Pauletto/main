@@ -42,10 +42,6 @@ let updatePosition;
     updatePosition(3,3, "Village");
     updatePosition(2,1, "Forest");
 
-    displayOnLog("You arrived in town !","logMessagePosition");
-    displayOnLog("You choped 2 wood logs !","logMessageRessource");
-    displayOnLog("You ran out of HP !","logMessageWarning");
-
 
 
     $(() => {

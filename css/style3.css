@@ -64,7 +64,7 @@ body  {
 	height: 100%;
 	overflow: auto;
 	background: darkslategray;
-	grid-template-columns: auto auto;
+	grid-template-columns: 50% 50%;
 }
 
 .inventory-panel {
@@ -73,8 +73,8 @@ body  {
 	height: 100%;
 	overflow: auto;
 	background: darkmagenta;
-	grid-template-columns: 50% auto;
-	grid-template-rows: 50% auto;
+	grid-template-columns: 50% 50%;
+	grid-template-rows: 50% 50%;
 }
 
 .map-panel {
