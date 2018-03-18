@@ -1,11 +1,11 @@
 class Menu {
-        constructor(inventory, jobs, map) {
+        constructor(inventory, jobs) {
             console.log("Menu Loading");
             this.eventType = this.mobileCheck() ? 'touchstart' : 'click';
             this.menu = $('#bt-menu');//$('#bt-menu');
             this.overlay = this.createOverlay();
 
-            this.map = map;
+            //this.map = map;
             this.inventory = inventory;
             this.jobs = jobs;
 
@@ -98,8 +98,6 @@ class Menu {
             inventoryPanel.append(resourcesInventory);
             inventoryPanel.append(itemsInventory);
 
-            //itemInventory
-            new Grid(10, 10, '.itemsInventory');
 
             /*##############################
             Create MAP PANEL
@@ -107,26 +105,14 @@ class Menu {
             let mapPanel = createPanel('map-panel');
 
             let map = $('<div />').attr("id", "map").attr("align", "center");
+            let alertMessageMoving = $('<div />').attr("id", "alertMovingMessage").addClass("alert alert-danger").attr("style", "display:none");
 
             let progress = $('<div />').addClass("progress");
             let bar = $('<div />').addClass("progress-bar progress-bar-striped active").attr("id","timer").css("width", "0%");
             progress.append(bar);
             mapPanel.append(progress);
+            mapPanel.append(alertMessageMoving);
             mapPanel.append(map);
-
-            $.ajax({
-                url: '../json/mapDB.php'
-            })
-                .done(function (data) {
-                    let map = new mapM(5,5,'#map',data);
-                    map.createMap();
-                    //$(".lake_case").addClass("lake_case");
-                    //$(".village_case").addClass("village_case");
-                    //$(".forest_case").addClass("forest_case");
-                })
-                .fail(function () {
-                    $("body").html(erreurCritique);
-                });
 
             /*##############################
             Create SKILL PANEL

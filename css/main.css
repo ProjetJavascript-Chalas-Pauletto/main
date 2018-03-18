@@ -1,25 +1,84 @@
 /*! HTML5 Boilerplate v6.0.1 | MIT License | https://html5boilerplate.com/ */
 
+.tooltip-inner {
+    padding: 16px;
+    max-width: 300px;
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    border-radius: 0;
+    background-color: #FFFFFF;
+    color: #26292E;
+    text-align: center;
+    text-decoration: none;
+}
+
 /* ==========================================================================
 INVENTORY
 ========================================================================== */
 
-.characterInventory{
+.characterInventory {
     grid-row-start: 1;
     grid-row-end: 3;
     background: #2980b9;
 }
 
-.characterInventory  div {
+.characterInventory div {
     width: 10%;
     height: 10%;
     background: #555555;
     border: 1px solid yellow;
 }
 
-.resourcesInventory{
+.resourcesInventory {
+    display: grid;
+
+    overflow: auto;
+    grid-template-columns: 20% 20% 20% 20% 20%;
+    grid-template-rows: repeat(4, 25%);
+
     background: yellow;
 }
+
+.resourcesInventory > div {
+    margin: auto;
+    width: 90%;
+    height: 90%;
+    position: relative;
+    background-color: #333333;
+    border-radius: 3px
+}
+
+.resourcesInventory > div:hover {
+    background: #555555;
+
+}
+
+.resourcesInventory .resourceDisplay {
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    color: white;
+}
+
+.resourcesInventory img {
+    align-self: center;
+    margin: auto;
+    height: 80%;
+    width: auto;
+
+    transition: transform .2s; /* Animation */
+}
+
+.resourcesInventory span, a {
+    display: flex;
+    height: 100%;
+    width: 100%;
+}
+
+.resourcesInventory img:hover {
+    transform: scale(1.2);
+}
+
 .itemsInventory {
     overflow: auto;
 }
@@ -32,6 +91,36 @@ INVENTORY
     width: 100px;
     padding: 10px;
     text-align: center;
+}
+
+.slider {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 15px;
+    border-radius: 5px;
+    background: #d3d3d3;
+    outline: none;
+    opacity: 0.7;
+    -webkit-transition: .2s;
+    transition: opacity .2s;
+}
+
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background: #4CAF50;
+    cursor: pointer;
+}
+
+.slider::-moz-range-thumb {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background: #4CAF50;
+    cursor: pointer;
 }
 
 /* ==========================================================================
@@ -48,11 +137,36 @@ JOBS
     background: #555555;
 }
 
-.jobSkill img{
-    max-width:90%;
-    max-height:90%;
+.jobSkill img {
+    max-width: 90%;
+    max-height: 90%;
 }
 
+/* Property used for scaling the jobButtons on main menu*/
+.grow {
+    transition: all .2s ease-in-out;
+}
+
+.grow:hover {
+    transform: scale(1.048);
+}
+
+/*-----------------------------------*/
+
+.jobButton {
+    font-weight: bold;
+    width: 30%;
+    margin: 3%;
+    border: 2px solid brown;
+    border-radius: 10px 100px / 120px;
+    display: inline-block;
+}
+
+.jobButton:active {
+    background-color: darkgrey;
+    box-shadow: 0 5px #666;
+    transform: translateY(4px);
+}
 
 /* ==========================================================================
 Map
@@ -67,26 +181,25 @@ Map
 }
 
 .lake_case {
-background-image: url('/img/sprites/lake50.png');
-width: 50px;
-height: 50px;
-display: inline-block;
+    background-image: url('/img/sprites/lake50.png');
+    width: 50px;
+    height: 50px;
+    display: inline-block;
 }
 
-.village_case {
-background-image: url('/img/sprites/village50.png');
-width: 50px;
-height: 50px;
-display: inline-block;
+.mine_case {
+    background-image: url('/img/sprites/mine50.png');
+    width: 50px;
+    height: 50px;
+    display: inline-block;
 }
 
 .forest_case {
-background-image : url('/img/sprites/forest50.png');
-width: 50px;
-height: 50px;
-display: inline-block;
+    background-image: url('/img/sprites/forest50.png');
+    width: 50px;
+    height: 50px;
+    display: inline-block;
 }
-
 
 /* ==========================================================================
 Incredible Loading page
@@ -121,9 +234,8 @@ Incredible Loading page
     align-items: center;
     z-index: 1001;
 
-    -webkit-animation: fadeIn 0.5s ease-out 1.1s forwards,spin 2s ease-in-out 2s,spin 2s ease-in-out 4s, fadeIn 0.3s ease-in 6.2s reverse forwards ;
-    animation: fadeIn 0.5s ease-out 0.5s forwards, fadeIn 0.3s ease-out 6.4s reverse forwards ;
-
+    -webkit-animation: fadeIn 0.5s ease-out 1.1s forwards, spin 2s ease-in-out 2s, spin 2s ease-in-out 4s, fadeIn 0.3s ease-in 6.2s reverse forwards;
+    animation: fadeIn 0.5s ease-out 0.5s forwards, fadeIn 0.3s ease-out 6.4s reverse forwards;
 
 }
 
@@ -136,9 +248,10 @@ animation: fadeIn 1s ease-out ,spin 2s ease-in-out infinite ; /* Chrome, Firefox
     top: -180px;
     z-index: 1001;
 
-    -webkit-animation: spin 2s ease-in-out infinite ; /* Chrome, Opera 15+, Safari 5+ */
-    animation: fadeIn 0.5s ease-out 1s forwards,spin 2s ease-in-out 2s,spin 2s ease-in-out 4s, fadeIn 0.3s ease-in 6.3s reverse forwards ;
+    -webkit-animation: spin 2s ease-in-out infinite; /* Chrome, Opera 15+, Safari 5+ */
+    animation: fadeIn 0.5s ease-out 1s forwards, spin 2s ease-in-out 2s, spin 2s ease-in-out 4s, fadeIn 0.3s ease-in 6.3s reverse forwards;
 }
+
 /*https://stackoverflow.com/questions/12590562/multiple-webkit-animations*/
 /*animation: shrink 2s ease-out, pulsate 4s 2s infinite ease-in-out;*/
 
@@ -149,8 +262,8 @@ animation: fadeIn 1s ease-out ,spin 2s ease-in-out infinite ; /* Chrome, Firefox
     left: 45px;
     z-index: 1001;
 
-    -webkit-animation: fadeIn 0.5s ease-out 1.1s forwards,spin 2s ease-in-out 2s,spin 2s ease-in-out 4s, fadeIn 0.3s ease-in 6.2s reverse forwards ;
-    animation: fadeIn 0.5s ease-out 1.1s forwards,spin 2s ease-in-out 2s,spin 2s ease-in-out 4s, fadeIn 0.3s ease-in 6.2s reverse forwards ;
+    -webkit-animation: fadeIn 0.5s ease-out 1.1s forwards, spin 2s ease-in-out 2s, spin 2s ease-in-out 4s, fadeIn 0.3s ease-in 6.2s reverse forwards;
+    animation: fadeIn 0.5s ease-out 1.1s forwards, spin 2s ease-in-out 2s, spin 2s ease-in-out 4s, fadeIn 0.3s ease-in 6.2s reverse forwards;
 }
 
 #loader4 {
@@ -160,8 +273,8 @@ animation: fadeIn 1s ease-out ,spin 2s ease-in-out infinite ; /* Chrome, Firefox
     left: 38px;
     z-index: 1001;
 
-    -webkit-animation: fadeIn 0.5s ease-out 1.1s forwards,spin 2s ease-in-out 2s,spin 2s ease-in-out 4s, fadeIn 0.3s ease-in 6.2s reverse forwards ;
-    animation: fadeIn 0.5s ease-out 1.2s forwards,spin 2s ease-in-out 2s,spin 2s ease-in-out 4s, fadeIn 0.3s ease-in 6.1s reverse forwards ;
+    -webkit-animation: fadeIn 0.5s ease-out 1.1s forwards, spin 2s ease-in-out 2s, spin 2s ease-in-out 4s, fadeIn 0.3s ease-in 6.2s reverse forwards;
+    animation: fadeIn 0.5s ease-out 1.2s forwards, spin 2s ease-in-out 2s, spin 2s ease-in-out 4s, fadeIn 0.3s ease-in 6.1s reverse forwards;
 }
 
 #loader5 {
@@ -171,8 +284,8 @@ animation: fadeIn 1s ease-out ,spin 2s ease-in-out infinite ; /* Chrome, Firefox
     left: 35px;
     z-index: 1001;
 
-    -webkit-animation: fadeIn 0.5s ease-out 1.1s forwards,spin 2s ease-in-out 2s,spin 2s ease-in-out 4s, fadeIn 0.3s ease-in 6.2s reverse forwards ;
-    animation: fadeIn 0.5s ease-out 1.3s forwards,spin 2s ease-in-out 2s,spin 2s ease-in-out 4s, fadeIn 0.3s ease-in 6s reverse forwards ;
+    -webkit-animation: fadeIn 0.5s ease-out 1.1s forwards, spin 2s ease-in-out 2s, spin 2s ease-in-out 4s, fadeIn 0.3s ease-in 6.2s reverse forwards;
+    animation: fadeIn 0.5s ease-out 1.3s forwards, spin 2s ease-in-out 2s, spin 2s ease-in-out 4s, fadeIn 0.3s ease-in 6s reverse forwards;
 }
 
 /*#loader {
@@ -224,32 +337,33 @@ animation: fadeIn 1s ease-out ,spin 2s ease-in-out infinite ; /* Chrome, Firefox
 */
 
 @-webkit-keyframes spin {
-    0%   {
-        -webkit-transform: rotate(0deg);  /* Chrome, Opera 15+, Safari 3.1+ */
-        -ms-transform: rotate(0deg);  /* IE 9 */
-        transform: rotate(0deg);  /* Firefox 16+, IE 10+, Opera */
+    0% {
+        -webkit-transform: rotate(0deg); /* Chrome, Opera 15+, Safari 3.1+ */
+        -ms-transform: rotate(0deg); /* IE 9 */
+        transform: rotate(0deg); /* Firefox 16+, IE 10+, Opera */
     }
     100% {
-        -webkit-transform: rotate(360deg);  /* Chrome, Opera 15+, Safari 3.1+ */
-        -ms-transform: rotate(360deg);  /* IE 9 */
-        transform: rotate(360deg);  /* Firefox 16+, IE 10+, Opera */
+        -webkit-transform: rotate(360deg); /* Chrome, Opera 15+, Safari 3.1+ */
+        -ms-transform: rotate(360deg); /* IE 9 */
+        transform: rotate(360deg); /* Firefox 16+, IE 10+, Opera */
     }
 }
+
 @keyframes spin {
-    0%   {
-        -webkit-transform: rotate(0deg);  /* Chrome, Opera 15+, Safari 3.1+ */
-        -ms-transform: rotate(0deg);  /* IE 9 */
-        transform: rotate(0deg);  /* Firefox 16+, IE 10+, Opera */
+    0% {
+        -webkit-transform: rotate(0deg); /* Chrome, Opera 15+, Safari 3.1+ */
+        -ms-transform: rotate(0deg); /* IE 9 */
+        transform: rotate(0deg); /* Firefox 16+, IE 10+, Opera */
     }
     100% {
-        -webkit-transform: rotate(360deg);  /* Chrome, Opera 15+, Safari 3.1+ */
-        -ms-transform: rotate(360deg);  /* IE 9 */
-        transform: rotate(360deg);  /* Firefox 16+, IE 10+, Opera */
+        -webkit-transform: rotate(360deg); /* Chrome, Opera 15+, Safari 3.1+ */
+        -ms-transform: rotate(360deg); /* IE 9 */
+        transform: rotate(360deg); /* Firefox 16+, IE 10+, Opera */
     }
 }
 
 @-webkit-keyframes fadeIn {
-    0%   {
+    0% {
         opacity: 0;
     }
     100% {
@@ -258,7 +372,7 @@ animation: fadeIn 1s ease-out ,spin 2s ease-in-out infinite ; /* Chrome, Firefox
 }
 
 @keyframes fadeIn {
-    0%   {
+    0% {
         opacity: 0;
     }
     100% {
@@ -267,7 +381,7 @@ animation: fadeIn 1s ease-out ,spin 2s ease-in-out infinite ; /* Chrome, Firefox
 }
 
 @-webkit-keyframes blackWhite {
-    0%   {
+    0% {
         background: #222222;
     }
     100% {
@@ -276,7 +390,7 @@ animation: fadeIn 1s ease-out ,spin 2s ease-in-out infinite ; /* Chrome, Firefox
 }
 
 @keyframes blackWhite {
-    0%   {
+    0% {
         background: #222222;
     }
     100% {
@@ -292,79 +406,84 @@ animation: fadeIn 1s ease-out ,spin 2s ease-in-out infinite ; /* Chrome, Firefox
     background: #222222;
     z-index: 1000;
 
-    animation: blackWhite 0.8s ease-out 3s forwards, blackWhite 0.8s ease-in 5s reverse forwards ;
+    animation: blackWhite 0.8s ease-out 3s forwards, blackWhite 0.8s ease-in 5s reverse forwards;
 }
 
 #loader-wrapper .loader-section.section-left {
     left: 0;
 }
+
 #loader-wrapper .loader-section.section-right {
     right: 0;
 }
 
 /* Loaded styles */
 .loaded #loader-wrapper .loader-section.section-left {
-    -webkit-transform: translateX(-100%);  /* Chrome, Opera 15+, Safari 3.1+ */
-    -ms-transform: translateX(-100%);  /* IE 9 */
-    transform: translateX(-100%);  /* Firefox 16+, IE 10+, Opera */
+    -webkit-transform: translateX(-100%); /* Chrome, Opera 15+, Safari 3.1+ */
+    -ms-transform: translateX(-100%); /* IE 9 */
+    transform: translateX(-100%); /* Firefox 16+, IE 10+, Opera */
 
-    -webkit-transition: all 0.7s 0.3s cubic-bezier(0.645, 0.045, 0.355, 1.000);  /* Android 2.1+, Chrome 1-25, iOS 3.2-6.1, Safari 3.2-6  */
-    transition: all 0.7s 0.3s cubic-bezier(0.645, 0.045, 0.355, 1.000);  /* Chrome 26, Firefox 16+, iOS 7+, IE 10+, Opera, Safari 6.1+  */
+    -webkit-transition: all 0.7s 0.3s cubic-bezier(0.645, 0.045, 0.355, 1.000); /* Android 2.1+, Chrome 1-25, iOS 3.2-6.1, Safari 3.2-6  */
+    transition: all 0.7s 0.3s cubic-bezier(0.645, 0.045, 0.355, 1.000); /* Chrome 26, Firefox 16+, iOS 7+, IE 10+, Opera, Safari 6.1+  */
 }
+
 .loaded #loader-wrapper .loader-section.section-right {
-    -webkit-transform: translateX(100%);  /* Chrome, Opera 15+, Safari 3.1+ */
-    -ms-transform: translateX(100%);  /* IE 9 */
-    transform: translateX(100%);  /* Firefox 16+, IE 10+, Opera */
+    -webkit-transform: translateX(100%); /* Chrome, Opera 15+, Safari 3.1+ */
+    -ms-transform: translateX(100%); /* IE 9 */
+    transform: translateX(100%); /* Firefox 16+, IE 10+, Opera */
 
-    -webkit-transition: all 0.7s 0.3s cubic-bezier(0.645, 0.045, 0.355, 1.000);  /* Android 2.1+, Chrome 1-25, iOS 3.2-6.1, Safari 3.2-6  */
-    transition: all 0.7s 0.3s cubic-bezier(0.645, 0.045, 0.355, 1.000);  /* Chrome 26, Firefox 16+, iOS 7+, IE 10+, Opera, Safari 6.1+  */
+    -webkit-transition: all 0.7s 0.3s cubic-bezier(0.645, 0.045, 0.355, 1.000); /* Android 2.1+, Chrome 1-25, iOS 3.2-6.1, Safari 3.2-6  */
+    transition: all 0.7s 0.3s cubic-bezier(0.645, 0.045, 0.355, 1.000); /* Chrome 26, Firefox 16+, iOS 7+, IE 10+, Opera, Safari 6.1+  */
 }
+
 .loaded #loader {
     opacity: 0;
 
-    -webkit-transition: all 0.3s ease-out;  /* Android 2.1+, Chrome 1-25, iOS 3.2-6.1, Safari 3.2-6  */
-    transition: all 0.3s ease-out;  /* Chrome 26, Firefox 16+, iOS 7+, IE 10+, Opera, Safari 6.1+  */
+    -webkit-transition: all 0.3s ease-out; /* Android 2.1+, Chrome 1-25, iOS 3.2-6.1, Safari 3.2-6  */
+    transition: all 0.3s ease-out; /* Chrome 26, Firefox 16+, iOS 7+, IE 10+, Opera, Safari 6.1+  */
 
 }
+
 .loaded #loader-wrapper {
     visibility: hidden;
 
-    -webkit-transform: translateY(-100%);  /* Chrome, Opera 15+, Safari 3.1+ */
-    -ms-transform: translateY(-100%);  /* IE 9 */
-    transform: translateY(-100%);  /* Firefox 16+, IE 10+, Opera */
+    -webkit-transform: translateY(-100%); /* Chrome, Opera 15+, Safari 3.1+ */
+    -ms-transform: translateY(-100%); /* IE 9 */
+    transform: translateY(-100%); /* Firefox 16+, IE 10+, Opera */
 
-    -webkit-transition: all 0.3s 1s ease-out;  /* Android 2.1+, Chrome 1-25, iOS 3.2-6.1, Safari 3.2-6  */
-    transition: all 0.3s 1s ease-out;  /* Chrome 26, Firefox 16+, iOS 7+, IE 10+, Opera, Safari 6.1+  */
+    -webkit-transition: all 0.3s 1s ease-out; /* Android 2.1+, Chrome 1-25, iOS 3.2-6.1, Safari 3.2-6  */
+    transition: all 0.3s 1s ease-out; /* Chrome 26, Firefox 16+, iOS 7+, IE 10+, Opera, Safari 6.1+  */
 }
-
-
 
 /* ==========================================================================
    Base styles: opinionated defaults
    ========================================================================== */
 
-html,body {
+html, body {
     height: 100%;
     margin: 0;
     padding: 0;
 }
 
-html{
+html {
     color: #222;
     font-size: 1em;
     line-height: 1.4;
 }
 
-.game{
+.game {
     user-select: none;
-    height:100%;
-
+    height: 100%;
     display: grid;
     grid-template-columns: 25% 50% 25%;
-    grid-template-rows: auto 20%;
+    grid-template-rows: 80% 20%;
 }
 
-.gameLeft{
+/* ==========================================================================
+   Left part of the game
+   ========================================================================== */
+
+.gameLeft {
     background: #2980b9;
     display: grid;
     grid-template-columns: 100%;
@@ -376,6 +495,7 @@ html{
     box-shadow: 0 0 0 3px #fff, 0 0 0 5px black, 0 0 0 10px saddlebrown, 0 0 2px 10px saddlebrown;
     margin: 20%;
     text-align: center;
+    overflow: auto;
 }
 
 #positionInfos p {
@@ -383,13 +503,13 @@ html{
 }
 
 #positionTitle {
-    padding-top: 5% ;
+    padding-top: 5%;
     color: orange;
 }
 
 .playerPosition {
     font-size: 200%;
-    color: crimson ;
+    color: crimson;
 }
 
 .playerPositionType {
@@ -398,50 +518,107 @@ html{
     color: lightgrey;
 }
 
-
+/* LOG PANEL */
 #log {
+    max-height: 90%;
+    width: 90%;
+    overflow : auto;
     border-top: 2px dashed sandybrown;
     border-bottom: 1px dashed sandybrown;
     box-shadow: inset 0 -1px 0 0 sandybrown, inset 0 1px 0 0 sandybrown, 0 1px 0 0 sandybrown, 0 -1px 0 0 sandybrown;
     margin: 5%;
-    position: relative;
+    font-size: small;
 }
 
-#logTitle{
-    padding-top: 3% ;
+#logTitle {
+    padding-top: 3%;
     text-align: center;
-    color : white;
+    color: white;
 }
 
-.logMessagePosition{
+.logMessagePosition {
     position: relative;
     color: yellow;
 }
 
-.logMessageRessource{
+.logMessageRessource {
     position: relative;
     color: greenyellow;
 }
 
-.logMessageWarning{
+.logMessageWarning {
     position: relative;
     color: red;
 }
 
-.gameMiddle{
-    background: #333333;
+/* ==========================================================================
+   Middle part of the game
+   ========================================================================== */
+
+.gameMiddle {
+    background: crimson;
 }
 
-.gameRight{
+#forest_type {
+    background-color: darkseagreen;
+    background-image: url("/img/sprites/forest_place400.png");
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+#lake_type {
+    background-color: cornflowerblue;
+    background-image: url("/img/sprites/lake_place400.png"); /* This image has been taken from the web but we will do one by ouserlves in the shortest times. */
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+#mine_type {
+    background-color: beige;
+    background-image: url("/img/sprites/rocky_place400.png");
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+#mainActivity {
+    text-align: center;
+}
+
+.gameRight {
     background: yellow;
 }
 
-.gameBottom{
-    background: crimson;
+.gameBottom {
+    background: #333333;
     grid-column-start: 1;
     grid-column-end: 4;
+
+    display: grid;
+    grid-template-columns: 25% 50% 25%;
+    grid-template-rows: 30% 30% auto;
 }
 
+.healthBar {
+    margin: 2% 2% 2% 2%;
+    grid-column: 2;
+}
+
+.energyBar {
+    margin-left: 2%;
+    margin-right: 2%;
+    grid-column: 2;
+}
+
+.expBar {
+    grid-column: 1;
+    grid-row: 3;
+    grid-column-start: 1;
+    grid-column-end: 4;
+    align-self: end;
+}
+
+
+/*-----------------------------*/
 
 /*
  * Remove text-shadow in selection highlight:
@@ -519,7 +696,6 @@ textarea {
     color: #000;
     padding: 0.2em 0;
 }
-
 
 /* ==========================================================================
    Helper classes
@@ -633,8 +809,9 @@ textarea {
     *:before,
     *:after {
         background: transparent !important;
-        color: #000 !important; /* Black prints faster:
-                                   http://www.sanbeiji.com/archives/953 */
+        color: #000 !important;
+        /* Black prints faster:
+                                          http://www.sanbeiji.com/archives/953 */
         box-shadow: none !important;
         text-shadow: none !important;
     }
@@ -656,7 +833,6 @@ textarea {
      * Don't show links that are fragment identifiers,
      * or use the `javascript:` pseudo protocol
      */
-
     a[href^="#"]:after,
     a[href^="javascript:"]:after {
         content: "";
@@ -665,6 +841,7 @@ textarea {
     pre {
         white-space: pre-wrap !important;
     }
+
     pre,
     blockquote {
         border: 1px solid #999;
@@ -675,7 +852,6 @@ textarea {
      * Printing Tables:
      * http://css-discuss.incutio.com/wiki/Printing_Tables
      */
-
     thead {
         display: table-header-group;
     }
