@@ -105,11 +105,13 @@ class Menu {
             let mapPanel = createPanel('map-panel');
 
             let map = $('<div />').attr("id", "map").attr("align", "center");
+            let alertMessageMoving = $('<div />').attr("id", "alertMovingMessage").addClass("alert alert-danger").attr("style", "display:none");
 
             let progress = $('<div />').addClass("progress");
             let bar = $('<div />').addClass("progress-bar progress-bar-striped active").attr("id","timer").css("width", "0%");
             progress.append(bar);
             mapPanel.append(progress);
+            mapPanel.append(alertMessageMoving);
             mapPanel.append(map);
 
             /*##############################
