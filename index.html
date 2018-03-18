@@ -13,13 +13,11 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <!-- <link rel="stylesheet" href="css/normalize.css"> -->
     <link rel="stylesheet" href="css/main.css">
-    <link rel="stylesheet" href="css/style3.css"/>
-
-    <script src="js/modernizr.custom.js"></script>
+    <link rel="stylesheet" href="css/menu.css"/>
 </head>
 <body>
 
-<!-- LOADING ANIMATION
+<!-- LOADING ANIMATION -->
 <div id="loader-wrapper">
     <div id="loader">
         <img src="img/Ozenix%20LogoSplit_1.png">
@@ -40,7 +38,6 @@
     <div class="loader-section section-left"></div>
     <div class="loader-section section-right"></div>
 </div>
--->
 
 
 <div id="notConnected" align="center" style="display: none">
@@ -51,20 +48,21 @@
         <input class="btn btn-light" type="submit" value="Connexion"/>
         <p id="logMsg"></p>
     </form>
-
-    <h1>Account creation</h1>
-    <div id="errorLogin" class="alert alert-danger" style="display:none"></div>
-    <form action="/json/accountCreation.php" method="post" id="accountCreationForm">
-        <label for="username">Username</label>
-        <input type="text" id="username" name="username"/><br/>
-        <label for="mail">Mail</label>
-        <input type="email" id="mail" name="mail"/><br/>
-        <label for="password">Password</label>
-        <input type="password" id="password" name="password"/><br/>
-        <label for="passwordCheck">Password verification</label>
-        <input type="password" id="passwordCheck" name="passwordCheck"/><br/>
-        <input type="submit" value="Create account"/>
-    </form>
+    <div id="containerLogIn">
+        <h1>Account creation</h1>
+        <div id="errorLogin" class="alert alert-danger" style="display:none"></div>
+        <form action="/json/accountCreation.php" method="post" id="accountCreationForm">
+            <label for="username">Username</label>
+            <input type="text" id="username" name="username"/><br/>
+            <label for="mail">Mail</label>
+            <input type="email" id="mail" name="mail"/><br/>
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password"/><br/>
+            <label for="passwordCheck">Password verification</label>
+            <input type="password" id="passwordCheck" name="passwordCheck"/><br/>
+            <input type="submit" value="Create account"/>
+        </form>
+    </div>
 </div>
 
 <div class="game" style="display:none">
@@ -80,9 +78,7 @@
         </div>
     </div>
     <div class="gameMiddle">
-        <div id="job" style="display: none">
-            <button id="click">Click</button>
-            <a data-toggle="modal" href="#resourceManager">Open Modal</a>
+        <div id="mainActivity">
         </div>
     </div>
 
@@ -136,12 +132,12 @@
 <nav id="bt-menu" class="bt-menu" style="display: none">
     <a href="#" class="bt-menu-trigger"><span>Menu</span></a>
     <ul>
-        <li><a href="#" class="bt-icon icon-user-outline">Character</a></li>
-        <li><a href="#" id="bt-jobs" class="bt-icon icon-windows">Jobs</a></li>
-        <li><a href="#" id="bt-skills" class="bt-icon icon-sun">Skills</a></li>
+        <li><a href="#" class="bt-icon icon-user-outline">WIP</a></li>
+        <li><a href="#" id="bt-jobs" class="bt-icon icon-windows">Jobs(wip)</a></li>
+        <li><a href="#" id="bt-skills" class="bt-icon icon-sun">Skills(wip)</a></li>
         <li><a href="#" id="bt-inventory" class="bt-icon icon-star">Inventory</a></li>
         <li><a href="#" id="bt-map" class="bt-icon icon-speaker">Map</a></li>
-        <li><a href="#" class="bt-icon icon-bubble">Logout</a></li>
+        <li><a href="#" class="bt-icon icon-bubble">WIP</a></li>
     </ul>
     <form id="logout-form" action="/json/logout.php" style="display: none">
         <input class="form-control" type="submit" value="Deconnexion"/>
@@ -171,8 +167,7 @@
 <script src="js/plugins.js"></script>
 <script src="js/mapM.js"></script>
 <script src="js/inventory.js"></script>
-<script src="js/grid.js"></script>
-<script src="js/borderMenu.js"></script>
+<script src="js/menu.js"></script>
 <script src="js/jobs.js"></script>
 <script src="js/character.js"></script>
 <script src="js/tools.js"></script>

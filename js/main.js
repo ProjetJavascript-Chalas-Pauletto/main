@@ -1,14 +1,13 @@
-let displayOnLog;
-let updatePosition;
 (function () {
     "use strict";
-
+    //This version variable will be used later to check if the user is on the right version of the game and isn't navigating in local if new features have been added.
     let version = "0.0.0";
 
     let criticalError =
         "Une erreur critique vient de se produire," + //Spreading mail adress in order to prohibit bots from getting it.
         "veuillez contacter l'administrateur à cette adresse mail : chalas." + ((true) ? 'paule' : "") + "tto@gm" +"a"+"il"+".co"+"m";
 
+    //Those css definitions have been left right here until we will implement Jquery UI to allow the usage of the .switchClass() which will be a great improvement. They are kind of a reminder.
     let cssError = {
         'background-color' :'#eeeeee',
         'border' : 'solid 1px red'
@@ -28,26 +27,12 @@ let updatePosition;
         $('#mail').css(cssClear);
     }
 
-    displayOnLog = (string,typeClass) => {
-        $('#log').append($('<div />').addClass(typeClass).html(string));
-    };
-
-    updatePosition = (pos_x,pos_y,type) => {
-        $('.playerPosition').empty();
-        $('.playerPositionType').empty();
-        $('#positionInfos').append($('<div />').addClass('playerPosition').html(pos_x + "," + pos_y));
-        $('#positionInfos').append($('<div />').addClass('playerPositionType').html(type));
-    };
-
-    updatePosition(3,3, "Village");
-    updatePosition(2,1, "Forest");
-
-
 
     $(() => {
+        //Cute opening & loading animation
         setTimeout(function(){
             $('body').addClass('loaded');
-        }, 6600); //6600
+        }, 6600);
 
         let init = function(){
             console.log("Initialising Game...");
@@ -55,8 +40,7 @@ let updatePosition;
 
         };
 
-
-
+        //Checking if the player is logged in.
         $.ajax({
             url: '../json/isLogged.php'
         }).done(function (data) {

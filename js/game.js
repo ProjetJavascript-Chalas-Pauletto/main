@@ -28,7 +28,7 @@ class Game {
                     url: '../json/mapDB.php'
                 })
                     .done(function (data) {
-                        self.map = new mapM(5, 5, '#map', data);
+                        self.map = new mapM(5, 5, '#map', data, self);
                         self.map.createMap();
                         //$(".lake_case").addClass("lake_case");
                         //$(".village_case").addClass("village_case");
@@ -67,7 +67,7 @@ class Game {
         $('#positionInfos').append($('<div />').addClass('playerPositionType').html(type));
     }
 
-    static updateActivity(ressourceId,mapType) {
+    updateActivity(ressourceId,mapType) {
 
         $('#mainActivity').empty(); // reinitilaizing for future calls
 
@@ -103,6 +103,8 @@ class Game {
 
         let click_activity_farm = () => { // Farm those gratefull resources !
             self.quantity += 1;
+            self.jobs[ressourceId].addExp(1);
+            self.inventory.setResource(ressourceId, 1);
         };
 
         let click_activity_save = () => { // Saving all the beautiful ressources you just farmed

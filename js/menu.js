@@ -98,8 +98,6 @@ class Menu {
             inventoryPanel.append(resourcesInventory);
             inventoryPanel.append(itemsInventory);
 
-            //itemInventory
-            new Grid(10, 10, '.itemsInventory');
 
             /*##############################
             Create MAP PANEL

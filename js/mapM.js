@@ -3,7 +3,7 @@ let mapM;
     "use strict";
 
     mapM = class mapM {
-        constructor(height,width,dest,data){
+        constructor(height,width,dest,data, game){
             this.height = height;
             this.width = width;
             this.map = $(dest);
@@ -12,6 +12,9 @@ let mapM;
             this.timeCheck = null;
             this.endTime = 0;
             this.timeTravel = 0;
+
+
+            this.game = game;
 
         }
 
@@ -25,7 +28,7 @@ let mapM;
                         self.tab[data.pos['POS_X']][data.pos['POS_Y']].append($('<div />').attr("id","posPlayer"));
                         Game.log("Welcome back, last time you were on " + data.landType + " : (" + data.pos['POS_X'] + "," + data.pos['POS_Y'] + ") !", "logMessagePosition");
                         Game.updatePosition(data.pos['POS_X'], data.pos['POS_Y'], "A peaceful resting place");
-                        Game.updateActivity(data.ressourceId,data.landType);
+                        self.game.updateActivity(data.ressourceId,data.landType);
                     }
                 })
                 .fail(function () {
@@ -143,7 +146,7 @@ let mapM;
                             self.tab[data.pos['POS_X_DEST']][data.pos['POS_Y_DEST']].append($('<div />').attr("id","posPlayer"));
                             Game.log("You arrived to " + data.landType + " (" + data.pos['POS_X_DEST'] + "," + data.pos['POS_Y_DEST'] + ") !", "logMessagePosition" );
                             Game.updatePosition(data.pos['POS_X_DEST'],data.pos['POS_Y_DEST'],data.landType);
-                            Game.updateActivity(data.ressourceId,data.landType);
+                            self.game.updateActivity(data.ressourceId,data.landType);
                         } else {
                             console.log(data.message);
                         }
