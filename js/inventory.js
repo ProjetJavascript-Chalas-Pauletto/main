@@ -2,8 +2,35 @@ class Inventory{
     constructor() {
         this.resources = [];
         this.resourceInventory = [];
+        this.capacity = 0;
+        this.maxCapacity = 10000;
+
+        this.init();
+
         this.loadResources();
         this.loadResourcesInventory();
+    }
+
+    init() {
+        let self = this;
+        $('#resourceManagerModal').on('show.bs.modal', function (event) {
+            let button = $(event.relatedTarget); // Button that triggered the modal
+            let modal = $(this);
+            modal.find('.modal-title').text(button.data('resourceName')).append($('<span />').addClass("badge badge-danger").html(button.data('resourceId')));
+            let slider = modal.find('#resourceRangeSelector').attr("max", button.data('resourceAmount')).val(0);
+
+            modal.find('#resourceAmount').text(0);
+            slider.on("input", () => {
+                modal.find('#resourceAmount').text(slider.val())
+            });
+
+            let discardResource = () => {
+                self.setResource(button.data('resourceId'), -parseInt(slider.val()));
+                console.log("You destroyed " + slider.val() + " " + button.data('resourceName'));
+                self.displayResources();
+            };
+            modal.find('#discardResourceButton').unbind().click(discardResource);
+        });
     }
 
     loadResources() { //Charges les ressources du jeu.
@@ -29,9 +56,14 @@ class Inventory{
         })
             .done(function (data) {
                 self.resourceInventory = data.resources;
-                console.log("Inventory resources loaded ! ");
+                //Size of inventory
+                for (let resource in self.resourceInventory){
+                    self.capacity += self.resources[resource][1]*self.resourceInventory[resource]
+                }
+                console.log("Inventory resources loaded ! Total size : " + self.capacity);
                 console.log(self.resourceInventory);
-                self.displayResources();
+
+                //self.displayResources();
             })
             .fail(function () {
                 $('body').html(data.msg);
@@ -41,23 +73,27 @@ class Inventory{
 
     setResource(id, amount){
         this.resourceInventory[id] += amount;
+        this.capacity += this.resources[id][1] * amount;;
     }
+
+
 
     displayResources () {
         let resourcesInventory =  $('.resourcesInventory');
-
         resourcesInventory.empty();
 
-
-        for (let resource in this.resourceInventory){
+        for (let resource in this.resourceInventory) {
             let resourceName = this.resources[resource][0];
 
             //Tooltip Info
-            let infos = "<h3>" + resourceName + "<span class=\"badge badge-danger\">"+ resource +"</span></h3><p>Quantity : " + this.resourceInventory[resource] + "</p><p>Size : "+ this.resources[resource][1]*this.resourceInventory[resource] +"</p>"
+            let sizeResource = this.resources[resource][1] * this.resourceInventory[resource];
+            let percentSize = (sizeResource * 100 / this.capacity).toFixed(2);
+            let infos = "<h3>" + resourceName + "<span class=\"badge badge-danger\">" + resource + "</span></h3><p>Quantity : " + this.resourceInventory[resource] +
+                "</p><p>Size : " + sizeResource + " (" + percentSize + "% of total)</p>";
 
             //Tooltip + modal
             let tooltip = $('<span />').attr("data-toggle", "tooltip").attr("data-html", "true").attr("title", infos);
-            let modal = $('<a />').attr("data-toggle","modal").attr("href","#resourceManager");
+            let modal = $('<a />').attr("data-toggle", "modal").attr("href", "#resourceManagerModal").data("resourceName", resourceName).data("resourceId", resource).data("resourceAmount", this.resourceInventory[resource]);
 
             tooltip.append(modal);
 
@@ -69,12 +105,10 @@ class Inventory{
             resourcesInventory.append($('<div />').addClass(resourceName).append(tooltip).append(nbResources));
         }
 
-        $(function () {
+
+        $(() => {
             $('[data-toggle="tooltip"]').tooltip()
         });
-        /*for(let i= 0; i < this.resourceInventory.length; ++i){
-            txt += this.resources[this.resourceInventory[i][0]][0] + " : " + this.resourceInventory[i][1] + " - ";
-        }*/
 
     }
 }

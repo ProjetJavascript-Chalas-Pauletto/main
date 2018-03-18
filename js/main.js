@@ -56,6 +56,7 @@ let updatePosition;
         };
 
 
+
         $.ajax({
             url: '../json/isLogged.php'
         }).done(function (data) {
@@ -64,6 +65,7 @@ let updatePosition;
                 $('#logout-form').show();
                 $('#bt-menu').show();
                 $('#job').show();
+                $('.game').show();
 
 
             } else { // User not connected
