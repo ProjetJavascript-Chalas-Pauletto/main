@@ -8,7 +8,6 @@ class Inventory{
         this.init();
 
         this.loadResources();
-        this.loadResourcesInventory();
     }
 
     init() {
@@ -42,6 +41,7 @@ class Inventory{
                 self.resources = data.resources;
                 console.log(Object.keys(self.resources).length + " resources loaded from server : ");
                 console.log(self.resources);
+                self.loadResourcesInventory();
             })
             .fail(function () {
                 $('body').html(data.msg);
