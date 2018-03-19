@@ -40,7 +40,7 @@ try
         case "LAKE":
             $resultat->ressourceId = 3;
             break;
-        case "VILLAGE":
+        case "MINE":
             $resultat->ressourceId = 2;
             break;
     }
