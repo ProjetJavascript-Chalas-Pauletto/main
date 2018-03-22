@@ -38,6 +38,9 @@
             console.log("Initialising Game...");
             let game = new Game();
 
+            let sound = Tools.getRandomInt(1,4);
+            $('body').append("<audio autoplay src='/audio/sound/Bienvenue" + sound + ".m4a'>");
+
         };
 
         //Checking if the player is logged in.
@@ -59,6 +62,8 @@
         }).fail(function () {
             $("body").html(erreurCritique);
         });
+
+
 
         $('#accountCreationForm').submit(function () {
             resetAppearance();
@@ -108,10 +113,14 @@
                 data: $(this).serialize()
             })
                 .done(function (data) {
-                    if (data.result) {
-                        window.location.reload();
-                    } else {
-                        $("#logMsg").html("Wrong password or email !")
+                    if (data.easterEgg){
+                        $('body').append("<audio autoplay src='/audio/music/Laventurier.mp3'>");
+                    }else{
+                        if (data.result) {
+                            window.location.reload();
+                        } else {
+                            $("#logMsg").html("Wrong password or email !")
+                        }
                     }
                 })
                 .fail(function () {
