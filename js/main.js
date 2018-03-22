@@ -114,7 +114,7 @@
             })
                 .done(function (data) {
                     if (data.easterEgg){
-                        $('body').append("<audio autoplay src='/audio/music/Laventurier.mp3'>");
+                        EasterEgg.samuel();
                     }else{
                         if (data.result) {
                             window.location.reload();
