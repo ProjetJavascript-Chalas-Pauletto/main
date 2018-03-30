@@ -39,7 +39,8 @@
             let game = new Game();
 
             let sound = Tools.getRandomInt(1,4);
-            $('body').append("<audio autoplay src='/audio/sound/Bienvenue" + sound + ".m4a'>");
+            SoundManager.playSong("Juif");
+            SoundManager.playSound("Bienvenue" + sound);
 
         };
 
