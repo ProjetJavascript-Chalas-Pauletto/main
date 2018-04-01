@@ -57,7 +57,7 @@
 
 
             } else { // User not connected
-                $('#notConnected').show();
+                $('#home').show();
                 $('#loader-wrapper').remove(); // Delete loading animation
             }
         }).fail(function () {
