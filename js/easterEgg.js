@@ -3,7 +3,7 @@ class EasterEgg {
 
         //$('.btn').prop('disabled', true);
 
-        SoundManager.playSong("Laventurier");
+        SoundManager.playSong("Laventurier.mp3", false);
         $('#notConnected').fadeOut(4000);
 
 

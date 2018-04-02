@@ -39,7 +39,7 @@
             let game = new Game();
 
             let sound = Tools.getRandomInt(1,4);
-            SoundManager.playSong("Juif");
+            SoundManager.playSong("Achaidh Cheide.ogg", true );
             SoundManager.playSound("Bienvenue" + sound);
 
         };

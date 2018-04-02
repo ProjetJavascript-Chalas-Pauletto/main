@@ -1,11 +1,16 @@
 class SoundManager {
 
-    static playSong(songName) {
-        $('#audioPlayer').attr('src', '/audio/music/' + songName + '.mp3')[0].play();
+    static playSong(songName, isLoop) {
+        let audio = $('#audioPlayer');
+        audio.attr('src', '/audio/music/' + songName)[0].play();
+        audio.prop("volume", 0.5);
+        audio.prop("loop", isLoop);
     }
 
     static playSound(soundName) {
-        $('#soundPlayer').attr('src', '/audio/sound/' + soundName + '.m4a')[0].play();
+        let audio = $('#soundPlayer');
+        audio.attr('src', '/audio/sound/' + soundName + '.m4a')[0].play();
+        audio.prop("volume", 0.5);
     }
 
 }
