@@ -1,7 +1,7 @@
 (function () {
     "use strict";
     //This version variable will be used later to check if the user is on the right version of the game and isn't navigating in local if new features have been added.
-    let version = "0.0.0";
+    let version = "0.1.0";
 
     let criticalError =
         "Une erreur critique vient de se produire," + //Spreading mail adress in order to prohibit bots from getting it.
@@ -55,11 +55,34 @@
                 $('#job').show();
                 $('.game').show();
 
-
             } else { // User not connected
                 $('#home').show();
+                SoundManager.playSong("The Quest - ASKII.mp3", true );
                 $('#loader-wrapper').remove(); // Delete loading animation
             }
+        }).always(function () {
+            console.log("Current version " + version);
+            let currentVersion = $('meta[name=version]').attr("content");
+            if(version !== currentVersion){
+                console.log("Last version : " + currentVersion);
+                console.log("Your version is UP TO DATE !! Please update reloading the cache for better experience !");
+
+                let versionModal = $('#versionModal');
+
+                let newVersion = "<span class='badge badge-success'>" + currentVersion + "<span/>";
+                let oldVersion = "<span class='badge badge-warning'>" + version + "<span/>";
+                $('#versionModalTitle').html("New version" + newVersion);
+                $('#localVersion').html("Your version : " + oldVersion);
+
+                versionModal.find('.modal-body').append($('<p />').html("Your version : " + oldVersion)).append($('<p />').html(" Up to date ! <br/> Please reload your cache for a better experience !"));
+                versionModal.modal({
+                    backdrop: 'static',
+                    keyboard: false
+                }).modal('toggle');
+            }
+
+
+
         }).fail(function () {
             $("body").html(erreurCritique);
         });
