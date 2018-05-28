@@ -12,6 +12,7 @@ body  {
 }
 
 
+
 .container {
 	padding: 80px;
 }
@@ -166,7 +167,7 @@ body  {
 	transform: translateY(350%);
 }
 
-.bt-menu #logout-form {
+.bt-menu #buttonLogout {
     position: fixed;
     right: 0;
     top: 0;
@@ -177,7 +178,7 @@ body  {
 	transform: translate3d(0,-100%,0);
 }
 
-.bt-menu.bt-menu-open #logout-form {
+.bt-menu.bt-menu-open #buttonLogout {
 	opacity: 1;
 	-webkit-transform: translate3d(0,0,0);
 	transform: translate3d(0,0,0);
